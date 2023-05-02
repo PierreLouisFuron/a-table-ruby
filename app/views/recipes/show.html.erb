@@ -3,6 +3,11 @@
 <%= render @recipe %>
 <h2><%= @recipe.name %></h2>
 <p><%= @recipe.description %></p>
+<p>
+  <% @recipe.tags.each do |tag| %>
+    <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
+  <% end %>
+</p>
 
 <div>
   <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
