@@ -2,6 +2,16 @@
 
 <%= render @recipe %>
 <h2><%= @recipe.name %></h2>
+<p>
+  <ul class="list-group list-group-horizontal-sm">
+    <% if @recipe.prep_time? %>
+      <li class="list-group-item"><i class="material-icons">back_hand</i> Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
+    <% end %>
+    <% if @recipe.cooking_time? %>
+      <li class="list-group-item"><i class="material-icons">local_fire_department</i> Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
+    <% end %>
+  </ul>
+</p>
 <p><%= @recipe.description %></p>
 <p>
   <ul>
