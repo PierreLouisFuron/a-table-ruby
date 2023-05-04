@@ -12,11 +12,36 @@
   <% end %>
 
   <div class="form-group row mb-3">
-    <div class="col-12"><%= form.text_field :name, class: "form-control rounded", placeholder: "Name" %></div>
+    <div class="col-12"><%= form.text_field :name, class: "form-control", placeholder: "Name" %></div>
+  </div>
+  
+  <div class="form-group row mb-3">
+    <div class="col-md-6">
+      <%= label_tag :duration, "Preparation Time" %>
+      <div class="input-group">
+        <%= text_field_tag :prep_time_days, nil, class: "form-control", placeholder: "0", value: @recipe.prep_time_days %>
+        <span class="input-group-text">Days</span>
+        <%= text_field_tag :prep_time_hours, nil, class: "form-control", placeholder: "0", value: @recipe.prep_time_hours %>
+        <span class="input-group-text">Hours</span>
+        <%= text_field_tag :prep_time_minutes, nil, class: "form-control", placeholder: "0", value: @recipe.prep_time_minutes %>
+        <span class="input-group-text">Minutes</span>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <%= label_tag :duration, "Cooking Time" %>
+      <div class="input-group">
+        <%= text_field_tag :cooking_time_days, nil, class: "form-control", placeholder: "0", value: @recipe.cooking_time_days %>
+        <span class="input-group-text">Days</span>
+        <%= text_field_tag :cooking_time_hours, nil, class: "form-control", placeholder: "0", value: @recipe.cooking_time_hours %>
+        <span class="input-group-text">Hours</span>
+        <%= text_field_tag :cooking_time_minutes, nil, class: "form-control", placeholder: "0", value: @recipe.cooking_time_minutes %>
+        <span class="input-group-text">Minutes</span>
+      </div>
+    </div>
   </div>
 
   <div class="form-group row mb-3">
-    <div class="col-12"><%= form.text_area :description, rows: 7, class: "form-control rounded", placeholder: 'Description' %></div>
+    <div class="col-12"><%= form.text_area :description, rows: 7, class: "form-control", placeholder: 'Description' %></div>
   </div>
 
   <div>
