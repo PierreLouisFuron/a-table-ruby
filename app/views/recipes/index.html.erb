@@ -2,13 +2,11 @@
 
 <h1>Recipes</h1>
 
-<div id="recipes">
+<%= link_to "New recipe", new_recipe_path, class: "mb-2 btn btn-primary" %>
+<div id="recipes" class="list-group">
   <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to recipe.name, recipe %>
-    </p>
+    <%= link_to recipe.name, recipe, class: "list-group-item list-group-item-action" %>
   <% end %>
 </div>
 
-<%= link_to "New recipe", new_recipe_path %>
+
