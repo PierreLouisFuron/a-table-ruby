@@ -16,7 +16,7 @@
   </div>
   
   <div class="form-group row mb-3">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <%= label_tag :duration, "Preparation Time" %>
       <div class="input-group">
         <%= text_field_tag :prep_time_days, nil, class: "form-control", placeholder: "0", value: @recipe.prep_time_days %>
@@ -27,7 +27,7 @@
         <span class="input-group-text">Minutes</span>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <%= label_tag :duration, "Cooking Time" %>
       <div class="input-group">
         <%= text_field_tag :cooking_time_days, nil, class: "form-control", placeholder: "0", value: @recipe.cooking_time_days %>
@@ -37,6 +37,10 @@
         <%= text_field_tag :cooking_time_minutes, nil, class: "form-control", placeholder: "0", value: @recipe.cooking_time_minutes %>
         <span class="input-group-text">Minutes</span>
       </div>
+    </div>
+    <div class="col-md-2">
+      <%= form.label :servings %>
+      <%= form.number_field :servings, class: 'form-control', placeholder: "0" %>
     </div>
   </div>
 

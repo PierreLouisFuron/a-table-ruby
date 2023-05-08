@@ -24,6 +24,8 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     respond_to do |format|
+      @recipe.prep_time = ((params[:prep_time_days].to_i * 24) + params[:prep_time_hours].to_i) * 60 + params[:prep_time_minutes].to_i
+      @recipe.cooking_time = ((params[:cooking_time_days].to_i * 24) + params[:cooking_time_hours].to_i) * 60 + params[:cooking_time_minutes].to_i
       if @recipe.save
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
@@ -67,6 +69,6 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:name, :description)
+      params.require(:recipe).permit(:name, :description, :servings)
     end
 end

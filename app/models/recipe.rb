@@ -10,38 +10,26 @@ class Recipe < ApplicationRecord
     attribute :cooking_time, :integer, default: 0
 
     def prep_time_days
-        if prep_time != 0
-            prep_time / (24 * 60)
-        end
+        prep_time / (24 * 60) != 0 ? prep_time / (24 * 60) : nil
     end 
 
     def prep_time_hours
-        if prep_time != 0
-            (prep_time / 60) % 24
-        end
+        (prep_time / 60) % 24 != 0 ? (prep_time / 60) % 24 : nil
     end
 
     def prep_time_minutes
-        if prep_time != 0
-            prep_time % 60
-        end
+        prep_time % 60 != 0 ? prep_time % 60 : nil
     end
 
     def cooking_time_days
-        if cooking_time != 0
-            cooking_time / (24 * 60)
-        end
+        cooking_time / (24 * 60) != 0 ? cooking_time / (24 * 60) : nil
     end 
 
     def cooking_time_hours
-        if cooking_time != 0
-            (cooking_time / 60) % 24
-        end
+        (cooking_time / 60) % 24 != 0 ? (cooking_time / 60) % 24 : nil
     end
 
     def cooking_time_minutes
-        if cooking_time != 0
-            cooking_time % 60
-        end
+        cooking_time % 60 != 0 ? cooking_time % 60 : nil
     end
 end
