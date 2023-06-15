@@ -4,3 +4,6 @@ import "controllers"
 
 import "popper"
 import "bootstrap"
+
+import 'selectize'
+import 'selectize/dist/css/selectize.bootstrap5.min.css'

@@ -1,0 +1,29 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Menus</h1>
+
+    <nav aria-label="Page navigation">
+    <%= form_with data: { turbo_frame: 'new_test_frame'} do |form|%>
+        <%= form.label 'menu_count' %>
+        <%= form.number_field 'menu_count', class: 'form-control', value: session[:menu_count] %>
+    <% end %>
+    <ul class="pagination">
+        <li class="page-item"><%= button_to '-', update_menu_count_path, params: { menu_action: 'decrease' }, class: 'page-link' %></li>
+        <li class="page-item"><div class="page-link"><%= session[:menu_count] %></div></li>
+        <li class="page-item"><%= button_to '+', update_menu_count_path, params: { menu_action: 'increase' }, class: 'page-link' %></li>
+    </ul>
+    </nav>
+    <turbo-frame id="new_test_frame">
+        <div class="row">
+            <div class="card-group text-center">
+                <% @recipes.each do |recipe| %>
+                    <div class="card">
+                        <%= image_tag 'placeholders/menu.png', class: 'card-img-top border bg-danger img-fluid', alt: 'menu' %>
+                        <div class="card-body">
+                        <p class="card-text"><%= recipe.name %></p>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </turbo-frame>
