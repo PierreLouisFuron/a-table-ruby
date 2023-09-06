@@ -1,38 +1,36 @@
 <p style="color: green"><%= notice %></p>
 
 <%# <%= render @recipe %>
-<turbo-frame id="tframe_test">
-  <h2><%= @recipe.name %></h2>
-  <p>
-    <ul class="list-group list-group-horizontal-sm">
-      <% if @recipe.prep_time? %>
-        <li class="list-group-item">Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
-      <% end %>
-      <% if @recipe.cooking_time? %>
-        <li class="list-group-item">Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
-      <% end %>
-      <% if @recipe.servings? %>
-        <li class="list-group-item"> Servings : <strong><%= @recipe.servings %></strong></li>
-      <% end %>
-    </ul>
-  </p>
-  <p>  
-    <% @recipe.tags.each do |tag| %>
-      <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
+<h2><%= @recipe.name %></h2>
+<p>
+  <ul class="list-group list-group-horizontal-sm">
+    <% if @recipe.prep_time? %>
+      <li class="list-group-item">Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
     <% end %>
-  </p>
-  <div>
-    <ul>
-      <% @recipe.ingredients.each do |ingredient| %>
-        <li><%= ingredient.name %></li>
-      <% end %>
-    </ul>
-  </div>
-  <p><%= @recipe.description %></p>
-</turbo-frame>
+    <% if @recipe.cooking_time? %>
+      <li class="list-group-item">Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
+    <% end %>
+    <% if @recipe.servings? %>
+      <li class="list-group-item"> Servings : <strong><%= @recipe.servings %></strong></li>
+    <% end %>
+  </ul>
+</p>
+<p>  
+  <% @recipe.tags.each do |tag| %>
+    <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
+  <% end %>
+</p>
+<div>
+  <ul>
+    <% @recipe.ingredients.each do |ingredient| %>
+      <li><%= ingredient.name %></li>
+    <% end %>
+  </ul>
+</div>
+<p><%= @recipe.description %></p>
 
-  <div class="mt-2">
-    <%= link_to "Edit this recipe", edit_recipe_path(@recipe), class: "btn btn-primary", data: { turbo_frame: 'tframe_test'} %>
-    <%= link_to "Back to recipes", recipes_path, class: "btn btn-primary" %>
-    <%= link_to "Destroy this recipe", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
-  </div>
+<div class="mt-2">
+  <%= link_to "Edit this recipe", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+  <%= link_to "Back to recipes", recipes_path, class: "btn btn-primary" %>
+  <%= link_to "Destroy this recipe", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
+</div>
