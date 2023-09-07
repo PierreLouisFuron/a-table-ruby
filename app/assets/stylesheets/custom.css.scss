@@ -1,0 +1,34 @@
+
+@import "bootstrap";
+@import "font-awesome";
+@import "material_icons";
+
+
+.navbar {
+    background-color:  #2effc9;
+}
+
+.btn-primary:active {
+    background-color:  #2effc9  ;
+    border-color:  #2effc9  ;
+    color: darkslategray;
+}
+
+.btn-primary {
+    background-color:  #2effc9  ;
+    border-color:  #2effc9  ;
+    color: darkslategray;
+}
+
+.btn-primary:hover {
+    background-color:  #2ce7b6  ;
+    border-color:  #2ce7b6  ;
+    color: darkslategray;
+}
+
+
+.btn-primary:focus {
+    background-color:  #2ce7b6  ;
+    border-color:  #2ce7b6  ;
+    color: darkslategray;
+}
