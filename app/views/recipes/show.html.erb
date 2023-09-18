@@ -26,7 +26,7 @@
     <% end %>
   </ul>
 </div>
-<p><%= @recipe.description %></p>
+<p><%= simple_format(@recipe.description) %></p>
 
 <div class="mt-2">
   <%= link_to "< Back", recipes_path, class: "btn btn-primary" %>
