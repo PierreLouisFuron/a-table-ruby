@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="form-group mb-3">
-    <%= form.text_field :name, class: "form-control", placeholder: "Name" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "My tasty new recipe" %>
   </div>
   
   <div class="form-group row mb-3">
@@ -44,13 +44,29 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-sm-5">Ingredient</div>
+    <div class="col-sm-3">Quantity</div>
+    <div class="col-sm-3">Unit</div>
+  </div>
+
+  <div id="recipeIngredients">
+  <%= form.fields_for :recipe_ingredients do |recipe_ingredient_form| %>
+      <%= render "recipe_ingredient_fields", f: recipe_ingredient_form %>
+    <% end %>
+    <div class='links mb-3'>
+      <%= link_to_add_association 'add ingredient', form, :recipe_ingredients, wrap_object: Proc.new { |recipe_ingredient| recipe_ingredient.build_ingredient; recipe_ingredient }, class: 'btn btn-primary' %>
+    </div>
+  </div>
+
   <div class="form-group mb-3">
     <%= form.label :tag_ids, 'Tags' %>
     <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, { multiple: true, class: 'form-control'} %>
   </div>
 
   <div class="form-group mb-3">
-    <%= form.text_area :description, rows: 7, class: "form-control", placeholder: 'Description' %>
+    <%= form.label :description, 'Instructions' %>
+    <%= form.text_area :description, rows: 7, class: "form-control", placeholder: "1. Chop the vegetables \n2. Fry them \n3. ..." %>
   </div>
 
   <%= form.submit nil, class: "btn btn-primary" %>

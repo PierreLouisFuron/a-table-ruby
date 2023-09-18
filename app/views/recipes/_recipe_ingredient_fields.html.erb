@@ -1,0 +1,19 @@
+<div class="nested-fields row mb-2">
+  <div class="ingredients col-sm-5">
+    <%= f.fields_for :ingredient do |ingredient| %>
+      <%= render "ingredient_fields", f: ingredient %>
+    <% end %>
+  </div>
+
+  <div class="col-sm-3">
+    <%= f.text_field :quantity, placeholder: '30.0', class:'form-control'  %>
+  </div>
+
+  <div class="col-sm-3">
+    <%= f.text_field :unit, placeholder: 'Kg, cL, Spoons, Gallons, ...', class:'form-control' %>
+  </div>
+
+  <div class="col-sm-1">
+    <%= link_to_remove_association "X", f, class: 'col-sm-1', class: 'btn btn-danger form-control' %>
+  </div>
+</div>

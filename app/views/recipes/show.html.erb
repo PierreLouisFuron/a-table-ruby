@@ -1,6 +1,5 @@
 <p style="color: green"><%= notice %></p>
 
-<%# <%= render @recipe %>
 <h2><%= @recipe.name %></h2>
 <p>
   <ul class="list-group list-group-horizontal-sm">
@@ -22,8 +21,8 @@
 </p>
 <div>
   <ul>
-    <% @recipe.ingredients.each do |ingredient| %>
-      <li><%= ingredient.name %></li>
+    <% @recipe.recipe_ingredients.each do |ri| %>
+      <li><%= ri.ingredient.name %> : <%= ri.quantity %> <%= ri.unit %></li>
     <% end %>
   </ul>
 </div>

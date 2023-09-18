@@ -1,13 +1,22 @@
 class Recipe < ApplicationRecord
     has_and_belongs_to_many :tags, join_table: :recipe_tags
-    # has_many :recipe_tags
-    # has_many :tags, :through => :recipe_tags
 
     has_many :recipe_ingredients
     has_many :ingredients, :through => :recipe_ingredients
+    accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 
+    validates_presence_of :name
+    
     attribute :prep_time, :integer, default: 0
     attribute :cooking_time, :integer, default: 0
+
+    before_save :find_or_create_ingredients
+
+    def find_or_create_ingredients
+        self.recipe_ingredients.each do |recipe_ingredient|
+            recipe_ingredient.ingredient = Ingredient.find_or_create_by(name:recipe_ingredient.ingredient.name)
+        end
+    end
 
     def prep_time_days
         prep_time / (24 * 60) != 0 ? prep_time / (24 * 60) : nil
@@ -32,4 +41,5 @@ class Recipe < ApplicationRecord
     def cooking_time_minutes
         cooking_time % 60 != 0 ? cooking_time % 60 : nil
     end
+
 end

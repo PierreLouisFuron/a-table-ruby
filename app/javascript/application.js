@@ -4,3 +4,7 @@ import "controllers"
 
 import "popper"
 import "bootstrap"
+
+import "jquery"
+import "jquery_ujs"
+import "@nathanvda/cocoon"

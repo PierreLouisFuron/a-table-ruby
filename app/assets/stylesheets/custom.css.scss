@@ -1,17 +1,9 @@
-
 @import "bootstrap";
 @import "font-awesome";
 @import "material_icons";
 
-
 .navbar {
     background-color:  #2effc9;
-}
-
-.btn-primary:active {
-    background-color:  #2effc9  ;
-    border-color:  #2effc9  ;
-    color: darkslategray;
 }
 
 .btn-primary {
@@ -26,6 +18,11 @@
     color: darkslategray;
 }
 
+.btn-primary:active {
+    background-color:  pink  ;
+    border-color:  pink  ;
+    color: pink;
+}
 
 .btn-primary:focus {
     background-color:  #2ce7b6  ;

@@ -9,6 +9,9 @@ gem 'chronic_duration'
 gem 'font-awesome-rails'
 gem 'material_icons'
 
+gem 'jquery-rails'
+gem 'cocoon'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 
