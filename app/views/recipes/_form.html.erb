@@ -66,8 +66,14 @@
 
   <div class="form-group mb-3">
     <%= form.label :description, 'Instructions' %>
-    <%= form.text_area :description, rows: 7, class: "form-control", placeholder: "1. Chop the vegetables \n2. Fry them \n3. ..." %>
+    <%= form.text_area :description, rows: 7, class: 'form-control', placeholder: "1. Chop the vegetables \n2. Fry them \n3. ..." %>
   </div>
 
-  <%= form.submit nil, class: "btn btn-primary" %>
+  <% if recipe %>
+    <%= link_to 'Cancel', recipe, class: 'btn btn-primary' %>
+  <% else %>
+    <%= link_to 'Cancel', recipes_path, class: 'btn btn-primary' %>
+  <% end %>
+  <%= form.submit nil, class: 'btn btn-primary' %>
+  
 <% end %>

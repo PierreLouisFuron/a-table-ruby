@@ -1,9 +1,7 @@
-<div style="color: green"><%= notice %></div>
-
 <h1>Recipes</h1>
 
 <div class='row mb-3'>
-  <div class="col-sm-10">
+  <div class="col-10">
     <%= form_with(url: recipes_path, method: 'get', local: true) do |form| %>
       <div class="input-group">
         <%= form.text_field :search, placeholder: 'Cake, Salad, Egg, Watermelon, ...', class: 'form-control' %>
@@ -12,14 +10,34 @@
     <% end %>
   </div>
 
-  <div class="col-sm-2">
+  <div class="col-2">
     <%= link_to "New recipe", new_recipe_path, class: "btn btn-primary pull-right" %>
   </div>
 </div>
 
-<div id="recipes" class="list-group">
+<div class="row">
   <% @recipes.each do |recipe| %>
-    <%= link_to recipe.name, recipe, class: "list-group-item list-group-item-action" %>
+    <div class="col-md-4">
+      <div class="card recipe-card shadow-sm mb-3">
+        <%= link_to recipe, class: "list-group-item list-group-item-action" do %>
+        <div class="row g-0">
+          <div class="col-md-4">
+            <%= image_tag 'placeholders/menu.png', class: 'responsive-height rounded-start', alt: 'menu' %>
+          </div>
+          <div class="col-md-8 bg-white rounded-end">
+            <div class="card-body">
+              <h5 class="card-title"><%= recipe.name %></h5>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+              <% recipe.tags.each do |tag| %>
+                <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
 

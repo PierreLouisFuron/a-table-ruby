@@ -2,6 +2,20 @@
 @import "font-awesome";
 @import "material_icons";
 
+.responsive-height {
+    max-height: 138px;
+}
+  
+.recipe-card {
+    height: 150;
+}
+
+.alert-success {
+    background-color:  #BFFFEF;
+    border-color:  #BFFFEF;
+    color: #29715F;
+}
+
 .navbar {
     background-color:  #2effc9;
 }

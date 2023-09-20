@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <h2><%= @recipe.name %></h2>
 <p>
   <ul class="list-group list-group-horizontal-sm">
@@ -20,9 +18,9 @@
   <% end %>
 </p>
 <div>
-  <ul>
+  <ul class="list-group" style="width: 20rem;">
     <% @recipe.recipe_ingredients.each do |ri| %>
-      <li><%= ri.ingredient.name %> : <%= ri.quantity %> <%= ri.unit %></li>
+      <li class="list-group-item"><%= ri.ingredient.name %> : <%= ri.quantity %> <%= ri.unit %></li>
     <% end %>
   </ul>
 </div>
