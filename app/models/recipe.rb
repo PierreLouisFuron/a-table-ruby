@@ -6,6 +6,7 @@ class Recipe < ApplicationRecord
     accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 
     validates_presence_of :name
+    validates_uniqueness_of :name
     
     attribute :prep_time, :integer, default: 0
     attribute :cooking_time, :integer, default: 0

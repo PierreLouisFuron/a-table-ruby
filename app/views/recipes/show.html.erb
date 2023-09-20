@@ -1,30 +1,39 @@
 <h2><%= @recipe.name %></h2>
-<p>
-  <ul class="list-group list-group-horizontal-sm">
-    <% if @recipe.prep_time? %>
-      <li class="list-group-item">Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
-    <% end %>
-    <% if @recipe.cooking_time? %>
-      <li class="list-group-item">Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
-    <% end %>
-    <% if @recipe.servings? %>
-      <li class="list-group-item"> Servings : <strong><%= @recipe.servings %></strong></li>
-    <% end %>
-  </ul>
-</p>
-<p>  
-  <% @recipe.tags.each do |tag| %>
-    <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
-  <% end %>
-</p>
-<div>
-  <ul class="list-group" style="width: 20rem;">
-    <% @recipe.recipe_ingredients.each do |ri| %>
-      <li class="list-group-item"><%= ri.ingredient.name %> : <%= ri.quantity %> <%= ri.unit %></li>
-    <% end %>
-  </ul>
+<div class="row mb-3">
+  <div class="col-4">
+    <ul class="list-group list-group-horizontal-sm mb-3">
+      <% if @recipe.prep_time? %>
+        <li class="list-group-item">Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
+      <% end %>
+      <% if @recipe.cooking_time? %>
+        <li class="list-group-item">Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
+      <% end %>
+      <% if @recipe.servings? %>
+        <li class="list-group-item"> Servings : <strong><%= @recipe.servings %></strong></li>
+      <% end %>
+    </ul>
+    <div class="mb-3">  
+      <% @recipe.tags.each do |tag| %>
+        <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
+      <% end %>
+    </div>
+    <ul class="list-group" style="width: 20rem;">
+      <% @recipe.recipe_ingredients.each do |ri| %>
+        <li class="list-group-item"><%= ri.ingredient.name %> : <%= ri.quantity %> <%= ri.unit %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-4 ms-auto">
+      <%= image_tag 'placeholders/menu.png', class: 'img-fluid rounded float-end', alt: 'menu' %>
+  </div>
+
 </div>
-<p><%= simple_format(@recipe.description) %></p>
+
+
+<div style="text-align: justify;">
+  <%= simple_format(@recipe.description) %>
+</div>
 
 <div class="mt-2">
   <%= link_to "< Back", recipes_path, class: "btn btn-primary" %>
