@@ -1,6 +1,6 @@
 <h2><%= @recipe.name %></h2>
 <div class="row mb-3">
-  <div class="col-4">
+  <div class="col-md-8 mb-3">
     <ul class="list-group list-group-horizontal-sm mb-3">
       <% if @recipe.prep_time? %>
         <li class="list-group-item">Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
@@ -23,13 +23,10 @@
       <% end %>
     </ul>
   </div>
-
-  <div class="col-4 ms-auto">
-      <%= image_tag 'placeholders/menu.png', class: 'img-fluid rounded float-end', alt: 'menu' %>
+  <div class="col-md-4 ms-auto">
+      <%= image_tag @recipe.get_cover_photo_path, class: 'img-fluid rounded float-end shadow-sm', alt: 'menu' %>
   </div>
-
 </div>
-
 
 <div style="text-align: justify;">
   <%= simple_format(@recipe.description) %>

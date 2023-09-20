@@ -13,7 +13,7 @@
         <div class="card-group text-center">
             <% @recipes.each do |recipe| %>
                  <%= link_to recipe, class: "card" do %>
-                    <%= image_tag 'placeholders/menu.png', class: 'card-img-top border bg-danger img-fluid', alt: 'menu' %>
+                    <%= image_tag recipe.get_cover_photo_path, class: 'card-img-top border bg-danger img-fluid', alt: 'menu' %>
                     <div class="card-body">
                         <p class="card-text"><%= recipe.name %></p>
                     </div>

@@ -9,6 +9,7 @@ TODO :
 - Add the possibility to import recipes
 - history
 - home page with recommendations like fast reciped, recipes based on season (so and tags), ...
+- improve error UI when an error occur on forms
 
 DONE: 
 - Add a picture to show recipe (fake for now)

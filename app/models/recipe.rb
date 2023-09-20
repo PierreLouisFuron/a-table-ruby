@@ -1,5 +1,7 @@
 class Recipe < ApplicationRecord
     has_and_belongs_to_many :tags, join_table: :recipe_tags
+    
+    has_many :photos, dependent: :destroy
 
     has_many :recipe_ingredients
     has_many :ingredients, :through => :recipe_ingredients
@@ -12,6 +14,14 @@ class Recipe < ApplicationRecord
     attribute :cooking_time, :integer, default: 0
 
     before_save :find_or_create_ingredients
+
+    def get_cover_photo_path
+        if self.photos.empty?
+            'placeholders/menu.png'
+        else
+            self.photos.first.path
+        end
+    end
 
     def find_or_create_ingredients
         self.recipe_ingredients.each do |recipe_ingredient|

@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_132215) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_135046) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "path", null: false
+    t.integer "recipe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["path"], name: "index_photos_on_path", unique: true
+    t.index ["recipe_id"], name: "index_photos_on_recipe_id"
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|
@@ -54,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_132215) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "photos", "recipes"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
   add_foreign_key "recipe_tags", "recipes"
