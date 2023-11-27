@@ -1,6 +1,6 @@
-<h1>Recipes</h1>
+<h1 class="mb-4">Recipes</h1>
 
-<div class='row mb-3'>
+<div class='row mb-5'>
   <div class="col-10">
     <%= form_with(url: recipes_path, method: 'get', local: true) do |form| %>
       <div class="input-group">
@@ -22,11 +22,11 @@
         <%= link_to recipe, class: "list-group-item list-group-item-action" do %>
         <div class="row g-0">
           <div class="col-4">
-            <%= image_tag recipe.get_cover_photo_path, class: 'responsive-height rounded-start', alt: 'menu' %>
+            <%= image_tag recipe.get_square_thumbnail, class: 'responsive-height rounded-start', alt: 'menu' %>
           </div>
           <div class="col-8 bg-white rounded-end">
             <div class="card-body">
-              <h5 class="card-title"><%= recipe.name %></h5>
+              <h5 class="card-title text-capitalize"><%= recipe.name %></h5>
               <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
               </p>
               <% recipe.tags.each do |tag| %>

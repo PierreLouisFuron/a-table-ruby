@@ -1,7 +1,8 @@
 class Recipe < ApplicationRecord
     has_and_belongs_to_many :tags, join_table: :recipe_tags
     
-    has_many :photos, dependent: :destroy
+    # has_many :photos, dependent: :destroy
+    has_many_attached :images
 
     has_many :recipe_ingredients
     has_many :ingredients, :through => :recipe_ingredients
@@ -15,11 +16,28 @@ class Recipe < ApplicationRecord
 
     before_save :find_or_create_ingredients
 
-    def get_cover_photo_path
-        if self.photos.empty?
-            'placeholders/menu.png'
+    def get_square_thumbnail
+        if self.images.empty?
+            'placeholders/placeholder.png'
+            # image = MiniMagick::Image.open(image_path)
         else
-            self.photos.first.path
+            self.images.first.variant(resize_to_fill: [300, 300], gravity: 'Center').processed
+        end
+    end
+
+    def get_cover_thumbnail
+        if self.images.empty?
+            'placeholders/placeholder.png'
+        else
+            self.images.first.variant(resize_to_limit: [300, 300]).processed
+        end
+    end
+
+    def get_cover_image
+        if self.images.empty?
+            'placeholders/placeholder.png'
+        else
+            self.images.first
         end
     end
 

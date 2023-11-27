@@ -3,7 +3,9 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <%= link_to 'A Table', root_path, class: 'navbar-brand' %>
+        <%= link_to root_path, class: 'navbar-brand' do %>
+            A TAAABLE !
+        <% end %>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="sidebarLabel"><%= link_to 'A Table', root_path, class: 'navbar-brand' %></h5>

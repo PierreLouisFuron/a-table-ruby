@@ -2,22 +2,22 @@
 
 <h1>Menus</h1>
 
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li class="page-item"><%= button_to '-', update_menu_count_path, params: { menu_action: 'decrease' }, class: 'page-link' %></li>
-            <li class="page-item"><div class="page-link"><%= session[:menu_count] %></div></li>
-            <li class="page-item"><%= button_to '+', update_menu_count_path, params: { menu_action: 'increase' }, class: 'page-link' %></li>
-        </ul>
-    </nav>
-    <div class="row">
-        <div class="card-group text-center">
-            <% @recipes.each do |recipe| %>
-                 <%= link_to recipe, class: "card" do %>
-                    <%= image_tag recipe.get_cover_photo_path, class: 'card-img-top border bg-danger img-fluid', alt: 'menu' %>
-                    <div class="card-body">
-                        <p class="card-text"><%= recipe.name %></p>
-                    </div>
-                <% end %>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item"><%= button_to '-', update_menu_count_path, params: { menu_action: 'decrease' }, class: 'page-link' %></li>
+        <li class="page-item"><div class="page-link"><%= session[:menu_count] %></div></li>
+        <li class="page-item"><%= button_to '+', update_menu_count_path, params: { menu_action: 'increase' }, class: 'page-link' %></li>
+    </ul>
+</nav>
+<div class="row">
+    <div class="card-group text-center">
+        <% @recipes.each do |recipe| %>
+            <%= link_to recipe, class: "card shadow-sm" do %>
+                <%= image_tag recipe.get_square_thumbnail, class: 'card-img-top border bg-danger img-fluid', alt: 'menu' %>
+                <div class="card-body">
+                    <p class="card-text"><%= recipe.name %></p>
+                </div>
             <% end %>
-        </div>
+        <% end %>
     </div>
+</div>

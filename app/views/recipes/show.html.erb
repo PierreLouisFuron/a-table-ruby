@@ -1,4 +1,8 @@
-<h2><%= @recipe.name %></h2>
+<h2 class="align-middle text-capitalize me-2" style="display: inline-block;"><%= @recipe.name %></h2>
+<% @recipe.tags.each do |tag| %>
+  <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
+<% end %>
+
 <div class="row mb-3">
   <div class="col-md-8 mb-3">
     <ul class="list-group list-group-horizontal-sm mb-3">
@@ -12,19 +16,28 @@
         <li class="list-group-item"> Servings : <strong><%= @recipe.servings %></strong></li>
       <% end %>
     </ul>
-    <div class="mb-3">  
-      <% @recipe.tags.each do |tag| %>
-        <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
-      <% end %>
-    </div>
     <ul class="list-group" style="width: 20rem;">
       <% @recipe.recipe_ingredients.each do |ri| %>
-        <li class="list-group-item"><%= ri.ingredient.name %> : <%= ri.quantity %> <%= ri.unit %></li>
+        <li class="list-group-item"> <span class="text-capitalize"><%= ri.ingredient.name %></span> : <%= ri.quantity %> <%= ri.unit %></li>
       <% end %>
     </ul>
   </div>
   <div class="col-md-4 ms-auto">
-      <%= image_tag @recipe.get_cover_photo_path, class: 'img-fluid rounded float-end shadow-sm', alt: 'menu' %>
+    <div class="recipe-photos">
+      <div class="photo-frame">
+        <%= link_to recipe_images_path(@recipe) do %>
+          <%= image_tag @recipe.get_cover_image, class: 'img-fluid rounded float-end shadow-sm', alt: 'menu' %>
+        <% end %>
+      </div>
+      <div class="row photo-navigation">
+        <%= form_with(model: @recipe) do |f| %>
+          <div class="field mt-2" style="display: flex;">
+            <%= f.file_field :images, multiple: true, class: 'form-control me-2' %>
+            <%= f.submit 'Upload', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 

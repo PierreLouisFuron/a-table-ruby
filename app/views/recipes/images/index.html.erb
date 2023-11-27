@@ -1,0 +1,14 @@
+<h2 class="text-capitalize"><%= @recipe.name %> - Images</h2>
+<% if @images.empty? %>
+    No photos
+<% else %>
+    <div class="row">
+        <% @images.each do |image|%>
+            <div class="col-4">
+                <%= link_to image do %>
+                    <% image_tag image, class: 'img-fluid rounded float-end shadow-sm', alt: 'menu'%>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+<% end %>
