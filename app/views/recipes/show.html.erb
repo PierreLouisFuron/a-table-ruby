@@ -32,6 +32,9 @@
       <div class="row photo-navigation">
         <%= form_with(model: @recipe) do |f| %>
           <div class="field mt-2" style="display: flex;">
+            <% @recipe.images.each do |image| %>
+              <%= f.hidden_field :images, multiple: true, value: image.signed_id %>
+            <% end %>
             <%= f.file_field :images, multiple: true, class: 'form-control me-2' %>
             <%= f.submit 'Upload', class: 'btn btn-primary' %>
           </div>

@@ -5,7 +5,7 @@ TODO :
 - Improve the search bar so that it can search ingredients in recipes (and words in the instructions)
 - improve the way to add tags to recipes
 - Add users / user profiles to the application
-- improve how the ingredients are displayed in reciepes
+- improve how the ingredients are displayed in recipes
 - Add the possibility to import recipes
 - history
 - home page with recommendations like fast reciped, recipes based on season (so and tags), ...
