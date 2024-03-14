@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
     has_and_belongs_to_many :tags, join_table: :recipe_tags
-    
+
     # has_many :photos, dependent: :destroy
     has_many_attached :images
 
@@ -10,7 +10,7 @@ class Recipe < ApplicationRecord
 
     validates_presence_of :name
     validates_uniqueness_of :name
-    
+
     attribute :prep_time, :integer, default: 0
     attribute :cooking_time, :integer, default: 0
 
@@ -21,7 +21,7 @@ class Recipe < ApplicationRecord
             'placeholders/placeholder.png'
             # image = MiniMagick::Image.open(image_path)
         else
-            self.images.first.variant(resize_to_fill: [300, 300], gravity: 'Center').processed
+            self.images.first.variant(resize_to_fill: [300, 300]).processed
         end
     end
 
@@ -49,7 +49,7 @@ class Recipe < ApplicationRecord
 
     def prep_time_days
         prep_time / (24 * 60) != 0 ? prep_time / (24 * 60) : nil
-    end 
+    end
 
     def prep_time_hours
         (prep_time / 60) % 24 != 0 ? (prep_time / 60) % 24 : nil
@@ -61,7 +61,7 @@ class Recipe < ApplicationRecord
 
     def cooking_time_days
         cooking_time / (24 * 60) != 0 ? cooking_time / (24 * 60) : nil
-    end 
+    end
 
     def cooking_time_hours
         (cooking_time / 60) % 24 != 0 ? (cooking_time / 60) % 24 : nil
