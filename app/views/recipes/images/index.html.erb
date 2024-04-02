@@ -1,13 +1,23 @@
 <h2 class="text-capitalize"><%= @recipe.name %> - Images</h2>
+<%= link_to "Back", @recipe, class: "btn btn-primary" %>
 <% if @images.empty? %>
-    No photos
+    <p class="mt-3"> No photos </p>
 <% else %>
     <div class="row">
         <% @images.each do |image|%>
-            <div class="col-4">
-                <%= link_to image do %>
-                    <% image_tag image, class: 'img-fluid rounded float-end shadow-sm', alt: 'menu'%>
-                <% end %>
+            <div class="col-4 mt-3">
+                <div class="row">
+                    <%= link_to image do %>
+                        <% image_tag image, class: 'img-fluid rounded float-end shadow-sm', alt: 'menu'%>
+                    <% end %>
+                </div>
+                <div class="row">
+                    <div class="col mt-2">
+                        <%# <div class="btn btn-danger">Delete</div>  %>
+                        <%= link_to 'Delete', recipe_destroy_image_path(@recipe, image), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+                        <%# link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
+                    </div>
+                </div>
             </div>
         <% end %>
     </div>

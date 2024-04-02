@@ -27,11 +27,14 @@
           <div class="col-8 bg-white rounded-end">
             <div class="card-body">
               <h5 class="card-title text-capitalize"><%= recipe.name %></h5>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-              </p>
               <% recipe.tags.each do |tag| %>
                 <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
               <% end %>
+            </div>
+            <div class="card-footer bg-transparent">
+              <p class="card-text">
+                <small class="text-muted fst-italic"><%= truncate("Source: Marmiton.com (hardcoded)", length: 27, separator: '') %></small>
+              </p>
             </div>
           </div>
         </div>

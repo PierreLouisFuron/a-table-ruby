@@ -1,0 +1,27 @@
+
+# DOCKER COMPOSE NOT YET WORKING
+
+version: '3.7'
+services:
+  db:
+    image: 'postgres'
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: atablepassword
+    # env_file:
+    #   - ./env/postgres.env # you can also define env variables like this.
+  rails:
+    # build: ./ 
+    image: a-table:3
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/docker/app # add our local code to dockerfile
+    depends_on:
+      - db  # add all dependant container
+
+volumes:
+  postgres: # named volume

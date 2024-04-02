@@ -1,6 +1,14 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[ show edit update destroy ]
 
+  def destroy_image
+    @recipe = Recipe.find(params[:recipe_id])
+    @image = @recipe.images.find(params[:id])
+    @image.purge
+
+    redirect_to recipe_images_path(@recipe), notice: 'Image was successfully deleted.'
+  end
+
   # GET /recipes or /recipes.json
   def index
     if params[:search]

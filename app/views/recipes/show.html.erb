@@ -49,7 +49,7 @@
 </div>
 
 <div class="mt-2">
-  <%= link_to "< Back", recipes_path, class: "btn btn-primary" %>
+  <%= link_to "Back", recipes_path, class: "btn btn-primary" %>
   <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary" %>
   <%= link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
 </div>
