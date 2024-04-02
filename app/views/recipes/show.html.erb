@@ -18,7 +18,11 @@
     </ul>
     <ul class="list-group" style="width: 20rem;">
       <% @recipe.recipe_ingredients.each do |ri| %>
-        <li class="list-group-item"> <span class="text-capitalize"><%= ri.ingredient.name %></span> : <%= ri.quantity %> <%= ri.unit %></li>
+        <li class="list-group-item"> 
+          <% if ri.is_optional %> ( <% end %>
+          <span class="text-capitalize"><%= ri.ingredient.name %></span> : <%= ri.quantity %> <%= ri.unit %>
+          <% if ri.is_optional %> ) <% end %>
+        </li>
       <% end %>
     </ul>
   </div>

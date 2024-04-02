@@ -45,13 +45,13 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-5">Ingredient</div>
-    <div class="col-sm-3">Quantity</div>
+    <div class="col-sm-4">Ingredient</div>
+    <div class="col-sm-2">Quantity</div>
     <div class="col-sm-3">Unit</div>
   </div>
 
   <div id="recipeIngredients">
-  <%= form.fields_for :recipe_ingredients do |recipe_ingredient_form| %>
+    <%= form.fields_for :recipe_ingredients do |recipe_ingredient_form| %>
       <%= render "recipe_ingredient_fields", f: recipe_ingredient_form %>
     <% end %>
     <div class='links mb-3'>
