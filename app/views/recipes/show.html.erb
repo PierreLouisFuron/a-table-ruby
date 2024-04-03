@@ -58,7 +58,13 @@
   Sources : 
   <ul class="list-group">
     <% @recipe.recipe_sources.each do |rs| %>
-      <li class="list-group-item"><%= rs.source.source_type %> - <%= rs.source.name %> - <%= rs.details %></li>
+      <li class="list-group-item">
+        <% if rs.source.website? %>
+          <%= rs.display_source %><%= link_to 'Go to original recipe', rs.details %>
+        <% else %>
+          <%= rs.display_source %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% end %>

@@ -1,0 +1,25 @@
+<div class="col-md-4">
+  <div class="card recipe-card shadow-sm mb-3">
+    <%= link_to recipe, class: "list-group-item list-group-item-action" do %>
+      <div class="row g-0">
+        <div class="col-4  ">
+          <%= image_tag recipe.get_square_thumbnail, class: 'responsive-height rounded-start', alt: 'menu' %>
+        </div>
+        <div class="col-8 bg-white rounded-end d-flex flex-column">
+          <div class="card-body">
+            <h5 class="card-title text-capitalize"><%= recipe.name %></h5>
+            <% recipe.tags.each do |tag| %>
+              <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
+            <% end %>
+          </div>
+
+          <div class="card-footer bg-transparent">
+            <div class="card-text">
+              <small class="text-muted fst-italic"><%= truncate("Source: #{recipe.sources.first.name}", length: 27, separator: '') %></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
