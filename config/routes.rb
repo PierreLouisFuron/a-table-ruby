@@ -6,6 +6,6 @@ Rails.application.routes.draw do
     delete 'image/:id', to: 'recipes#destroy_image', as: 'destroy_image'
   end
   get "menus", to: "menus#index"
-  post '/update_menu_count', to: 'menus#update_menu_count' 
+  post '/update_menu_count', to: 'menus#update_menu_count'
 
 end

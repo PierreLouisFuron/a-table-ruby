@@ -33,7 +33,7 @@
             </div>
             <div class="card-footer bg-transparent">
               <p class="card-text">
-                <small class="text-muted fst-italic"><%= truncate("Source: Marmiton.com (hardcoded)", length: 27, separator: '') %></small>
+                <small class="text-muted fst-italic"><%= truncate("Source: #{recipe.sources.first.name}", length: 27, separator: '') %></small>
               </p>
             </div>
           </div>

@@ -69,6 +69,19 @@
     <%= form.text_area :description, rows: 7, class: 'form-control', placeholder: "1. Chop the vegetables \n2. Fry them \n3. ..." %>
   </div>
 
+  <div class="row">
+    <div class="col-sm-4">Sources</div>
+  </div>
+
+  <div id="recipeSources">
+    <%= form.fields_for :recipe_sources do |recipe_source_form| %>
+      <%= render "recipe_source_fields", f: recipe_source_form %>
+    <% end %>
+    <div class='links mb-3'>
+      <%= link_to_add_association 'add source', form, :recipe_sources, wrap_object: Proc.new { |recipe_source| recipe_source.build_source; recipe_source }, class: 'btn btn-primary' %>
+    </div>
+  </div>
+
   <% if recipe %>
     <%= link_to 'Cancel', recipe, class: 'btn btn-primary' %>
   <% else %>

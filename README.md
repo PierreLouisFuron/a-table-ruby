@@ -35,9 +35,9 @@ Things you may want to cover:
 # Deploy on Raspberry Pi server
 
 1. ssh server
-2. Pull latest docker image from docker hub
-`(sudo) docker pull cybberbobby/a-table(:latest)`
-3. `docker create network a_table_network`
+2. Pull latest docker image from docker hub : 
+`docker pull cybberbobby/a-table(:latest)`
+3. Create network to allow the app and db containers to communicate `docker create network a_table_network`
 4. Pull and run official postgres container
 `docker run -p 5432:5432 --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
 `docker run --network a_table_network --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
@@ -55,8 +55,8 @@ After the container is up and running
 
 # Useful commands
 
-- `(sudo) docker ps` see running containers
-- `(sudo) docker ps -a` see all containers
+- `docker ps` see running containers
+- `docker ps -a` see all containers
 - `docker rm CONTAINER_NAME` remove container
 - `docker start CONTAINERT_NAME` start container
 - `docker stop CONTAINER_NAME` stop container

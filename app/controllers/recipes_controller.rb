@@ -94,6 +94,15 @@ class RecipesController < ApplicationController
           :_destroy,
           :id,
           ingredient_attributes: [ :name ]
+        ],
+        recipe_sources_attributes: [
+          :details,
+          :_destroy,
+          :id,
+          source_attributes: [
+            :name,
+            :source_type
+          ]
         ]
       )
     end

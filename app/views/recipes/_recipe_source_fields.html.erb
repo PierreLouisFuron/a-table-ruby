@@ -1,0 +1,15 @@
+<div class="row nested-fields mb-2">
+  <div class="ingredients col-sm-5">
+    <%= f.fields_for :source do |source| %>
+      <%= render "source_fields", f: source %>
+    <% end %>
+  </div>
+
+  <div class="col-sm-6">
+    <%= f.text_field :details, placeholder: '30.0', class:'form-control'  %>
+  </div>
+
+  <div class="col-sm-1">
+    <%= link_to_remove_association "X", f, class: 'col-sm-1', class: 'btn btn-danger form-control' %>
+  </div>
+</div>

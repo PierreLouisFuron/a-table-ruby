@@ -1,6 +1,12 @@
+<div class="mb-2">
+  <%= link_to "Back", recipes_path, class: "btn btn-primary" %>
+  <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+  <%= link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
+</div>
+
 <h2 class="align-middle text-capitalize me-2" style="display: inline-block;"><%= @recipe.name %></h2>
 <% @recipe.tags.each do |tag| %>
-  <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
+  <span class="badge rounded-pill text-bg-primary mb-2"><%= tag.name %></span>
 <% end %>
 
 <div class="row mb-3">
@@ -18,11 +24,7 @@
     </ul>
     <ul class="list-group" style="width: 20rem;">
       <% @recipe.recipe_ingredients.each do |ri| %>
-        <li class="list-group-item"> 
-          <% if ri.is_optional %> ( <% end %>
-          <span class="text-capitalize"><%= ri.ingredient.name %></span> : <%= ri.quantity %> <%= ri.unit %>
-          <% if ri.is_optional %> ) <% end %>
-        </li>
+        <li class="list-group-item"><%= ri.display_ingredient_name %></li>
       <% end %>
     </ul>
   </div>
@@ -52,8 +54,11 @@
   <%= simple_format(@recipe.description) %>
 </div>
 
-<div class="mt-2">
-  <%= link_to "Back", recipes_path, class: "btn btn-primary" %>
-  <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary" %>
-  <%= link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
-</div>
+<% if @recipe.sources.any? %>
+  Sources : 
+  <ul class="list-group">
+    <% @recipe.recipe_sources.each do |rs| %>
+      <li class="list-group-item"><%= rs.source.source_type %> - <%= rs.source.name %> - <%= rs.details %></li>
+    <% end %>
+  </ul>
+<% end %>
