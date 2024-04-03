@@ -15,7 +15,9 @@
 
           <div class="card-footer bg-transparent">
             <div class="card-text">
-              <small class="text-muted fst-italic"><%= truncate("Source: #{recipe.sources.first.name}", length: 27, separator: '') %></small>
+              <% if recipe.sources.any? %>
+                <small class="text-muted fst-italic"><%= truncate("Source: #{recipe.sources.first.name}", length: 27, separator: '') %></small>
+              <% end %>
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     if params[:search]
-      @recipes = Recipe.where("name LIKE ?", "%#{params[:search]}%")
+      @recipes = Recipe.where("lower(name) LIKE ?", "%#{params[:search].downcase}%")
     else
       @recipes = Recipe.all
     end
