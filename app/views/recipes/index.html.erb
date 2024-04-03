@@ -1,18 +1,14 @@
 <h1 class="mb-4">Recipes</h1>
 
-<div class='row mb-5'>
-  <div class="col-10">
-    <%= form_with(url: recipes_path, method: 'get', local: true) do |form| %>
-      <div class="input-group">
-        <%= form.text_field :search, placeholder: 'Cake, Salad, Egg, Watermelon, ...', class: 'form-control' %>
-        <%= form.submit 'Search', class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-  </div>
+<div class='mb-5 d-flex'>
+  <%= form_with(url: recipes_path, method: 'get', local: true, class: 'flex-grow-1') do |form| %>
+    <div class="input-group">
+      <%= form.text_field :search, placeholder: 'Cake, Salad, Egg, Watermelon, ...', class: 'form-control' %>
+      <%= form.submit 'Search', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
 
-  <div class="col-2">
-    <%= link_to "New recipe", new_recipe_path, class: "btn btn-primary pull-right" %>
-  </div>
+  <%= link_to "New recipe", new_recipe_path, class: "btn btn-primary pull-right ms-2" %>
 </div>
 
 <div class="row">
