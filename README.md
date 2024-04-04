@@ -34,14 +34,14 @@ Things you may want to cover:
 # Deploy on Raspberry Pi server
 
 1. ssh server
-2. Pull latest docker image from docker hub :  `docker pull cybberbobby/a-table(:latest)`
-3. Create network to allow the app and db containers to communicate (if not present already)  `docker create network a_table_network`
-4. Create volume to store the images (if not present already)  `docker volume create a_table_images`
-5. Pull and run official postgres container (if not present already)  
+2. Pull latest docker image from docker hub <br>`docker pull cybberbobby/a-table(:latest)`
+3. Create network to allow the app and db containers to communicate (if not present already) <br>`docker create network a_table_network`
+4. Create volume to store the images (if not present already) <br>`docker volume create a_table_images`
+5. Pull and run official postgres container (if not present already) <br>
 `docker run -p 5432:5432 --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
 `docker run --network a_table_network --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
-6. Remove old app container (if already present)  `docker stop a-table && docker rm a-table`
-7. Mount and start container and make it available on port 3000  `docker run -d -p 3000:3000 --network a_table_network --name a-table -v a_table_images:/app/public/images cybberbobby/a-table`
+6. Remove old app container (if already present) <br>`docker stop a-table && docker rm a-table`
+7. Mount and start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table -v a_table_images:/app/public/images cybberbobby/a-table`
 
 # Setup DB for the first time
 
