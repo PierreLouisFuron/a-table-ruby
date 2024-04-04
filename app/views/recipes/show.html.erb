@@ -50,12 +50,22 @@
   </div>
 </div>
 
+<div class="row mt-2 mb-2">
+  <div class="col-12 d-flex">
+    <hr class="flex-grow-1"><span class="mx-3">Instructions</span><hr class="flex-grow-1">
+  </div>
+</div>
+
 <div style="text-align: justify;">
   <%= simple_format(@recipe.description) %>
 </div>
 
 <% if @recipe.sources.any? %>
-  Sources : 
+  <div class="row mt-2 mb-2">
+    <div class="col-12 d-flex">
+      <hr class="flex-grow-1"><span class="mx-3">Sources</span><hr class="flex-grow-1">
+    </div>
+  </div>
   <ul class="list-group">
     <% @recipe.recipe_sources.each do |rs| %>
       <li class="list-group-item">
