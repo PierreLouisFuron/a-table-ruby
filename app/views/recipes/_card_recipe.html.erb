@@ -7,7 +7,7 @@
         </div>
         <div class="col-8 bg-white rounded-end d-flex flex-column">
           <div class="card-body">
-            <h5 class="card-title text-capitalize"><%= recipe.name %></h5>
+            <h6 class="card-title text-capitalize"><%= recipe.name %></h6>
             <% recipe.tags.each do |tag| %>
               <span class="badge rounded-pill text-bg-primary"><%= tag.name %></span>
             <% end %>
