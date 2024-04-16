@@ -11,28 +11,28 @@ tags = Tag.create([{name: "Vegan"}, {name: "Kids Friendly"}, {name: "Winter"}, {
 
 Recipe.create([
     {
-        name: "Tiramisu", 
-        description: "Hum, c'est bon le tiramisu", 
-        prep_time: 50, 
-        servings: 8, 
-        tags: [tags.second, tags[5]], 
+        name: "Tiramisu",
+        description: "1. Séparer les blancs des jaunes d'oeufs.\n\n2. Mélanger les jaunes avec le sucre roux et le sucre vanillé.\n\n3. Ajouter le mascarpone au fouet.\n\n4. Monter les blancs en neige et les incorporer délicatement à la spatule au mélange précédent. Réserver.\n\n5. Mouiller les biscuits dans le café rapidement avant d'en tapisser le fond du plat.\n\n6. Recouvrir d'une couche de crème au mascarpone puis répéter l'opération en alternant couche de biscuits et couche de crème en terminant par cette dernière.\n\n7. Saupoudrer de cacao.\n\n8. Mettre au réfrigérateur 4 heures minimum puis déguster frais.",
+        prep_time: 50,
+        servings: 8,
+        tags: [tags.second, tags[5]],
         ingredients: [ingredients.last, ingredients[5]]
     },
     {
-        name: "Salade Cesar", 
-        description: "Melanger la salade, le jambon et le fromage", 
+        name: "Salade Cesar",
+        description: "Melanger la salade, le jambon et le fromage",
         prep_time: 10,
         ingredients: [ingredients.first, ingredients.second, ingredients.third]
     },
     {
-        name: "Cake aux Olives", 
-        description: "Dans un grand bol melanger la farine, l'huile, les olives et mettre au four a 180 degres. ", 
-        prep_time: 30, 
-        cooking_time:25, 
+        name: "Cake aux Olives",
+        description: "Dans un grand bol melanger la farine, l'huile, les olives et mettre au four a 180 degres. ",
+        prep_time: 30,
+        cooking_time:25,
         servings: 10
     },
     {
-        name: "Tresse", 
+        name: "Tresse",
         description: "Faire legerement chauffer le lait et ajouter la levure de boulanger. Ajouter dans un saladier le lait et la levure, puis le sel, sucre farine oeufs et le beurre puis malaxer a la main."
     },
     {
