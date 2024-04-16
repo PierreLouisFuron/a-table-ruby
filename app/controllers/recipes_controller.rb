@@ -33,8 +33,8 @@ class RecipesController < ApplicationController
 
   # POST /recipes or /recipes.json
   def create
+    create_new_tags
     @recipe = Recipe.new(recipe_params)
-
     respond_to do |format|
       @recipe.prep_time = ((params[:prep_time_days].to_i * 24) + params[:prep_time_hours].to_i) * 60 + params[:prep_time_minutes].to_i
       @recipe.cooking_time = ((params[:cooking_time_days].to_i * 24) + params[:cooking_time_hours].to_i) * 60 + params[:cooking_time_minutes].to_i
@@ -50,8 +50,7 @@ class RecipesController < ApplicationController
 
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
-
-    binding.irb
+    create_new_tags
     respond_to do |format|
       @recipe.prep_time = ((params[:prep_time_days].to_i * 24) + params[:prep_time_hours].to_i) * 60 + params[:prep_time_minutes].to_i
       @recipe.cooking_time = ((params[:cooking_time_days].to_i * 24) + params[:cooking_time_hours].to_i) * 60 + params[:cooking_time_minutes].to_i
@@ -76,6 +75,18 @@ class RecipesController < ApplicationController
   end
 
   private
+
+    def create_new_tags
+      if params[:recipe][:tag_ids]
+        params[:recipe][:tag_ids].each_with_index do |tag_param, index|
+          if tag_param.to_i == 0 && tag_param != ''
+            tag = Tag.find_or_create_by(name: tag_param.downcase)
+            params[:recipe][:tag_ids][index] = tag.id
+          end
+        end
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find(params[:id])

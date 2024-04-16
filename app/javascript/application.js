@@ -7,6 +7,6 @@ import "bootstrap"
 
 import "jquery"
 import "jquery_ujs"
-// import "@selectize/selectize"
+
 import "tom-select"
 import "@nathanvda/cocoon"

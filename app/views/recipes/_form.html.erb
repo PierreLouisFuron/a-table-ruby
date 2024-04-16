@@ -61,9 +61,7 @@
 
   <div class="form-group mb-3">
     <%= form.label :tag_ids, 'Tags' %>
-    <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, { multiple: true, class: 'form-control', data: {controller:"select"}} %>
-    <%#= form.select :tag_ids, [], {}, { class: 'form-control tagging-input', id: 'diacritics' } %>
-    <%#= form.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: 'form-control', data: {controller:"select"} } %>
+    <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, { multiple: true, placeholder: 'Add here the recipe tags', class: '', data: { controller:"select" } } %>
   </div>
 
   <div class="form-group mb-3">
