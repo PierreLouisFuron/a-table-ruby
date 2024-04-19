@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+
+  include Pagy::Backend
   before_action :set_recipe, only: %i[ show edit update destroy ]
 
   def destroy_image
@@ -12,9 +14,9 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     if params[:search]
-      @recipes = Recipe.where("lower(name) LIKE ?", "%#{params[:search].downcase}%")
+      @pagy, @recipes = pagy(Recipe.where("lower(name) LIKE ?", "%#{params[:search].downcase}%"))
     else
-      @recipes = Recipe.all
+      @pagy, @recipes = pagy(Recipe.all)
     end
   end
 
