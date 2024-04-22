@@ -25,13 +25,15 @@ Things you may want to cover:
 
 * ...
 
-# Create container and upload to Docker Hub
+## Create container and upload to Docker Hub
 
 1. `docker build . -t a-table:3`
 2. `docker tag a-table:3 cybberbobby/a-table`
 3. `docker push cybberbobby/a-table`
 
-# Deploy on Raspberry Pi server
+# Deploy A Taaable
+
+## First Ever Deploy on Raspberry Pi server
 
 1. ssh server
 2. Pull latest docker image from docker hub <br>`docker pull cybberbobby/a-table(:latest)`
@@ -41,16 +43,23 @@ Things you may want to cover:
 `docker run -p 5432:5432 --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
 `docker run --network a_table_network --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
 6. Remove old app container (if already present) <br>`docker stop a-table && docker rm a-table`
-7. Mount and start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table -v a_table_images:/app/public/images cybberbobby/a-table`
+7. Mount, start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table -v a_table_images:/app/public/images cybberbobby/a-table`
 
-# Setup DB for the first time
+## Setup DB for the first time
 
 After the container is up and running 
 1. `docker exec -it a-table bash`
 2. `rails db:create`
 3. `rails db:migrate`
 
-# Useful commands
+## Update A Taaable's container
+
+1. ssh server
+2. Remove old app container <br>`docker stop a-table && docker rm a-table`
+3. Pull latest docker image from docker hub <br>`docker pull cybberbobby/a-table(:latest)`
+4. Mount, start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table -v a_table_images:/app/public/images cybberbobby/a-table`
+
+## Useful commands
 
 - `docker ps` see running containers
 - `docker ps -a` see all containers

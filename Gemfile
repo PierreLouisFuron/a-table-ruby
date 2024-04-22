@@ -9,6 +9,7 @@ gem 'chronic_duration'
 gem 'font-awesome-rails'
 gem 'material_icons'
 
+gem 'jquery-rails'
 gem 'cocoon'
 gem 'pagy'
 
