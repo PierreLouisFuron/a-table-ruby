@@ -14,7 +14,13 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     if params[:search]
-      @pagy, @recipes = pagy(Recipe.where("lower(name) LIKE ?", "%#{params[:search].downcase}%"))
+      search_options = {
+        include_recipes: params.has_key?(:include_recipes),
+        include_ingredients: params.has_key?(:include_ingredients),
+        include_tags: params.has_key?(:include_tags),
+        include_sources: params.has_key?(:include_sources),
+      }
+      @pagy, @recipes = pagy(Recipe.search(params[:search], search_options))
     else
       @pagy, @recipes = pagy(Recipe.all)
     end

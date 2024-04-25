@@ -1,14 +1,45 @@
 <h1 class="mb-4">Recipes</h1>
 
-<div class='d-flex mb-3'>
-  <%= form_with(url: recipes_path, method: 'get', local: true, class: 'flex-grow-1') do |form| %>
-    <div class="input-group">
-      <%= form.text_field :search, placeholder: 'Cake, Salad, Egg, Watermelon, ...', class: 'form-control' %>
-      <%= form.submit 'Search', class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+  <%= form_with(url: recipes_path, method: 'get', local: true) do |form| %>
+    <div class='d-flex mb-3'>
 
-  <%= link_to "New recipe", new_recipe_path, class: "btn btn-primary pull-right ms-2" %>
+    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <%= form.check_box :include_recipes, { class: 'btn-check', checked: params.keys.any? { |key| key.to_s.start_with?('include_') } ? params.has_key?(:include_recipes) : true, include_hidden: false } %>
+        <%= form.label :include_recipes, "Recipes", class: 'btn btn-outline-primary' %>
+      
+        <%= form.check_box :include_ingredients, { class: 'btn-check', include_hidden: false, checked: params.has_key?(:include_ingredients) } %>
+        <%= form.label :include_ingredients, "Ingredients", class: 'btn btn-outline-primary' %>
+      
+        <%= form.check_box :include_tags, { class: 'btn-check', include_hidden: false, checked: params.has_key?(:include_tags) } %>
+        <%= form.label :include_tags, "Tags", class: 'btn btn-outline-primary' %>
+      
+        <%= form.check_box :include_sources, { class: 'btn-check', include_hidden: false, checked: params.has_key?(:include_sources)} %>
+        <%= form.label :include_sources, "Sources", class: 'btn btn-outline-primary' %>
+    </div>
+
+    <%#div class="input_group btn-group ms-2" role="group" aria-label="Basic checkbox toggle button group">
+      <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" checked="true">
+      <label class="btn btn-outline-primary" for="btncheck1">Recipes</label>
+
+      <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btncheck2">Tags</label>
+
+      <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btncheck3">Ingredients</label>
+
+      <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btncheck4">Sources</label>
+    </div%>
+
+    <div class="flex-grow-1 ms-2">
+      <div class="input-group">
+        <%= form.text_field :search, placeholder: 'Cake, Salad, Egg, Watermelon, ...', class: 'form-control' %>
+        <%= form.submit 'Search', class: 'btn btn-primary' %>
+        </div>
+    </div>
+
+    <%= link_to "New recipe", new_recipe_path, class: "btn btn-primary ms-2" %>
+  <% end %>
 </div>
 
 <div class="row">
