@@ -45,6 +45,31 @@
     color: darkslategray;
 }
 
+.btn-outline-primary { 
+    border-color:  #2effc9;
+    color: darkslategray;
+    --bs-btn-hover-bg: #2effc9;
+    --bs-btn-hover-border-color: #2effc9;
+}
+
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show { 
+    background-color: #2effc9;
+    border-color: #2effc9;
+    color: darkslategray;
+}
+
+.btn-outline-primary:hover {
+    border-color:  #2ce7b6  ;
+    color: darkslategray;
+    --bs-btn-hover-bg: #2effc9;
+    --bs-btn-hover-border-color: #2effc9;
+}
+
+.btn-outline-primary:focus {
+    border-color:  #2ce7b6  ;
+    color: darkslategray;
+}
+
 .card-footer {
     border-top: none;
 }

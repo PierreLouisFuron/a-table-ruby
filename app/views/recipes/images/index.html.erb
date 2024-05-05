@@ -1,11 +1,22 @@
 <h2 class="text-capitalize"><%= @recipe.name %> - Images</h2>
-<%= link_to "Back", @recipe, class: "btn btn-primary" %>
+
+<%= form_with(model: @recipe) do |f| %>
+    <div class="mt-2 d-flex">
+        <%= link_to "Back", @recipe, class: "btn btn-primary me-2" %>
+        <% @recipe.images.each do |image| %>
+            <%= f.hidden_field :images, multiple: true, value: image.signed_id %>
+        <% end %>
+        <%= f.file_field :images, multiple: true, class: 'form-control me-2' %>
+        <%= f.submit 'Upload', class: 'btn btn-primary' %>
+    </div>
+<% end %>
+
 <% if @images.empty? %>
     <p class="mt-3"> No photos </p>
 <% else %>
     <div class="row">
         <% @images.each do |image|%>
-            <div class="col-4 mt-3">
+            <div class="col-sm-4 mt-3">
                 <div class="row">
                     <%= link_to image do %>
                         <% image_tag image, class: 'img-fluid rounded float-end shadow-sm', alt: 'menu'%>

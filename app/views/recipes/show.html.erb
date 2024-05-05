@@ -1,23 +1,30 @@
 
-<div class="row mb-2">
-  <div class="col-md-4 ms-auto">
+<div class="row">
+  <div class="col-md-4 ms-auto mb-3">
     <div class="recipe-photos">
-      <div class="photo-frame">
-        <%= link_to recipe_images_path(@recipe) do %>
-          <%= image_tag @recipe.get_cover_image, class: 'img-fluid rounded float-end shadow-sm', alt: 'menu' %>
-        <% end %>
-      </div>
-      <div class="row photo-navigation">
-        <%= form_with(model: @recipe) do |f| %>
-          <div class="field mt-2" style="display: flex;">
-            <% @recipe.images.each do |image| %>
-              <%= f.hidden_field :images, multiple: true, value: image.signed_id %>
-            <% end %>
-            <%= f.file_field :images, multiple: true, class: 'form-control me-2' %>
-            <%= f.submit 'Upload', class: 'btn btn-primary' %>
+      <%= link_to recipe_images_path(@recipe) do %>
+        <% unless @recipe.images.count > 1 %>
+          <%= image_tag @recipe.get_cover_image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
+        <% else %>
+          <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+              <% @recipe.images.each_with_index do |image, index| %>
+                <div class="carousel-item <%= 'active' if index == 0 %>">
+                  <%= image_tag image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
+                </div>
+              <% end %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 
