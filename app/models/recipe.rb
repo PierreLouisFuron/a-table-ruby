@@ -63,6 +63,21 @@ class Recipe < ApplicationRecord
         end
     end
 
+    def get_tiny_cover_thumbnail
+        if self.images.empty?
+            'placeholders/placeholder.png'
+            # placeholder_path = Rails.root.join('app', 'assets', 'images', 'placeholders', 'placeholder.png')
+            # # require 'image_processing/mini_magick'
+            # processed = ImageProcessing::MiniMagick
+            #         .source(placeholder_path)
+            #         .resize_to_limit(100, 100)
+            #         .call
+            # processed.path
+        else
+            self.images.first.variant(resize_to_limit: [100, 100]).processed
+        end
+    end
+
     def get_cover_image
         if self.images.empty?
             'placeholders/placeholder.png'
