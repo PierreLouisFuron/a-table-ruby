@@ -1,12 +1,21 @@
 <div class="row">
-    <h1>Home#index</h1>
-    <p>Find me in app/views/home/index.html.erb</p>
-
-	<p> sortable list </p>
-	<ul data-controller="position">
-		<li>Item 1</li>
-		<li>Item 2</li>
-		<li>Item 3</li>
-		<li>Item 4</li>
-	</ul>
+  <h1>Today's Menu </h1>
+  <% Meal.where(date: DateTime.now).each do |meal| %>
+    <% if meal.recipes.count > 0 %>
+      <h3>Meal</h3>
+      <div class="row mb-3">
+        <div class="col-md-<%= [meal.recipes.count*2,12].min %> card-group text-center" >
+          <% meal.recipes.each do |recipe| %>
+            <%= link_to recipe, class: "card shadow-sm" do %>
+              <!--div class="card-title"> test </div-->
+              <%= image_tag recipe.get_square_thumbnail, class: 'card-img-top bg-danger', alt: 'menu' %>
+              <div class="card-body">
+                <p class="card-text"><%= recipe.name %></p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

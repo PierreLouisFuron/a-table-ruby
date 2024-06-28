@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
 
     has_and_belongs_to_many :tags, join_table: :recipe_tags
+    has_and_belongs_to_many :meals
 
     # has_many :photos, dependent: :destroy
     has_many_attached :images

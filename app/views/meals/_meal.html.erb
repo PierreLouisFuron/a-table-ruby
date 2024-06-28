@@ -1,0 +1,74 @@
+<div class="d-flex">
+  <div class="card-text flex-fill ">
+    <%= turbo_frame_tag "tft_meal_#{meal.id}" do %>
+      <% if meal.recipes.count == 0 %>
+        <div>Empty meal</div>
+      <%else %>
+        <div id="carousel_meal_<%= meal.id %>" class="carousel slide">
+          <% if meal.recipes.count > 1 %>
+            <div class="carousel-indicators">
+              <% (0..meal.recipes.count-1).each do |index| %>
+                <button type="button" data-bs-target="#carousel_meal_<%= meal.id %>" data-bs-slide-to="<%=index%>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index+1%>"></button>
+              <% end %>
+            </div>
+          <% end %>
+          <div class="carousel-inner">
+            <% meal.recipes.each_with_index do |recipe, index| %>
+              <div class="carousel-item <%= 'active' if index == 0 %>">
+                <%= image_tag recipe.get_cover_image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
+                <div class="carousel-caption">
+                  <%= recipe.name %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <% if meal.recipes.count > 1 %>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel_meal_<%= meal.id %>" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel_meal_<%= meal.id %>" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div>
+    <!-- Button trigger modal -->
+    <button type="button" class="badge rounded-pill text-bg-light" data-bs-toggle="modal" data-bs-target="#addRecipeModal<%=meal.id%>"> + </button>
+    <!-- Modal -->
+    <div class="modal fade" id="addRecipeModal<%=meal.id%>" data-bs-backdrop="static" tabindex="-1" aria-labelledby="addRecipeModal<%=meal.id%>" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addRecipeModal<%=meal.id%>">Meal (<%= meal.id %>) - Add Recipes</h1>
+            <%# button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button %>
+          </div>
+          <div class="modal-body text-start">
+            <%= form_with url: search_recipes_path, method: :get, local: false, data: { turbo_frame: "search_results_#{meal.id}" } do |form| %>
+              <div class="input-group">
+                <%= form.text_field :query, placeholder: "Search for recipes...", class: 'form-control' %>
+                <%= form.hidden_field :meal_id, value: meal.id %>
+                <%= form.submit "Search", class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+            <%= turbo_frame_tag "search_results_#{meal.id}" %>
+          </div>
+          <div class="modal-footer">
+            <%
+=begin%>
+ <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+<%
+=end%>
+            <%= button_to 'Close', update_meal_path, data: { turbo_frame: "tft_meal_#{meal.id}", bs_dismiss: "modal"}, params: { meal_id: meal.id }, class: 'btn btn-secondary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>

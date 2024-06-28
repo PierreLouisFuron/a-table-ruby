@@ -11,6 +11,23 @@ class RecipesController < ApplicationController
     redirect_to recipe_images_path(@recipe), notice: 'Image was successfully deleted.'
   end
 
+  def search
+    @recipes = if params[:query].present?
+      Recipe.where("name ILIKE ?", "%#{params[:query]}%")
+    else
+      Recipe.all
+    end
+    @meal = if params[:meal_id].present?
+      Meal.find(params[:meal_id])
+    else
+      nil
+    end
+    respond_to do |format|
+      # format.turbo_stream { render partial: "home/recipes", locals: { recipes: @recipes } }
+      format.html { render partial: "menus/recipes", locals: { recipes: @recipes, meal: @meal } }
+    end
+  end
+
   # GET /recipes or /recipes.json
   def index
     if params[:search]

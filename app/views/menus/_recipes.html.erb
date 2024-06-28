@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "search_results_#{meal.id}" do %>
+  <ul class="list-group list-group-flush mt-2">
+    <% if recipes.empty? %>
+      <li class="list-group-item">No result</li>
+    <% else %>
+      <% recipes.each do |recipe| %>
+        <%= render 'menus/recipe_item', meal: meal, recipe: recipe %>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,0 +1,15 @@
+<li class="list-group-item"> 
+  <div class="d-flex justify-content-between">
+    <div class="d-flex align-items-center">
+      <%= recipe.name %>
+    </div>
+
+    <%= turbo_frame_tag "tft_meal_#{meal.id}_recipe_#{recipe.id}" do %>
+      <% if meal.recipes.exists?(id: recipe.id) %>
+        <%= button_to 'remove', remove_recipe_from_menu_path, data: { turbo_frame: "tft_meal_#{meal.id}_recipe_#{recipe.id}" }, params: { recipe_id: recipe.id, meal_id: meal.id }, class: 'btn link-primary' %>
+      <% else %>
+        <%= button_to 'add', add_recipe_to_menu_path, data: { turbo_frame: "tft_meal_#{meal.id}_recipe_#{recipe.id}" }, params: { recipe_id: recipe.id, meal_id: meal.id }, class: 'btn btn-link' %>
+      <% end %>
+    <% end %> 
+  </div>
+</li>

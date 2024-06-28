@@ -2,22 +2,22 @@
 
 <h1>Menus</h1>
 
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        <li class="page-item"><%= button_to '-', update_menu_count_path, params: { menu_action: 'decrease' }, class: 'page-link' %></li>
-        <li class="page-item"><div class="page-link"><%= session[:menu_count] %></div></li>
-        <li class="page-item"><%= button_to '+', update_menu_count_path, params: { menu_action: 'increase' }, class: 'page-link' %></li>
-    </ul>
-</nav>
-<div class="row">
-    <div class="card-group text-center">
-        <% @recipes.each do |recipe| %>
-            <%= link_to recipe, class: "card shadow-sm" do %>
-                <%= image_tag recipe.get_square_thumbnail, class: 'card-img-top border bg-danger img-fluid', alt: 'menu' %>
-                <div class="card-body">
-                    <p class="card-text"><%= recipe.name %></p>
-                </div>
-            <% end %>
-        <% end %>
+<%= form_with(model: Menu.new) do |form| %>
+  <div class="row">
+    <div class="col-auto">
+      <%= form.date_field :start_date, class: 'form-control col-auto' %>
     </div>
-</div>
+    <div class="col-auto">
+      <%= form.date_field :end_date, class: 'form-control col-auto' %>
+    </div>
+    <div class="col-auto">
+      <%= form.submit "Create Menu", class:'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
+
+<%= render @menus %>
+
+<h1 class="mt-2">History</h1>
+<p>Quia sunt enim illum alias aut. Provident earum omnis explicabo iure. Ea qui eos quae. Laboriosam soluta nemo recusandae ipsa qui est consequatur earum. Libero ea laboriosam ea. Excepturi dolorum veritatis esse laboriosam nostrum.</p>
+<p>Doloremque nemo nemo sed porro. Iste deserunt natus id qui quas. Aspernatur est eum ut rem qui velit. Delectus in ut qui et qui et.</p>

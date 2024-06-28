@@ -16,12 +16,12 @@
   <body>
     <%= render 'layouts/navbar' %>
     <div class="container mt-3 mb-5">
-    <% if notice %>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <%= notice %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>
