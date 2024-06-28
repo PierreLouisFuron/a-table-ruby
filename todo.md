@@ -14,6 +14,8 @@ TODO :
 - Improve the UI to handle menus and meals
 
 DONE: 
+- add small recipe image to list of recipes when adding a recipe to meals, from the menu page
+- improve how dates are displayed on the menu page
 - possibility to create menus with meals with recipes
 - improve how the ingredients are displayed in recipes
 - add sources to each recipe : link to a website, recipe cookbook with photo, author, ...

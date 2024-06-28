@@ -3,7 +3,7 @@
     <% (menu.start_date..menu.end_date).to_a.each do |date| %>
       <div class="card shadow-sm">
         <div class="card-header"> 
-          <%= date %>
+          <%= date.strftime("%A, %B %d") %>
         </div>
         <div class="card-body">
           <% menu.meals.where(date: date).each_with_index do |meal, index| %>
