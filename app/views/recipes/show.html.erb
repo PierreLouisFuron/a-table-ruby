@@ -29,13 +29,18 @@
   </div>
 
   <div class="col-md-8 mb-3">
-    <div class="mb-2">
-      <%= link_to "Back", recipes_path, class: "btn btn-primary" %>
-      <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary" %>
-      <%= link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
+    <div class="d-flex justify-content-between">
+      <h2 class="text-capitalize">
+        <%= @recipe.name %>
+      </h2>
+      
+      <div>
+        <div class="btn btn-primary">Add to Menu</div>
+        <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+        <%= link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
+      </div>
     </div>
 
-    <h2 class="align-middle text-capitalize me-2" style="display: inline-block;"><%= @recipe.name %></h2>
     <% @recipe.tags.each do |tag| %>
       <span class="badge rounded-pill text-bg-primary mb-2"><%= tag.name %></span>
     <% end %>

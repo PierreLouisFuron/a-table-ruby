@@ -1,5 +1,7 @@
 TODO : 
-- possibility to create menus with meals with recipes
+- add recipe to menus from the recipe show page
+- add another button to quickly remove recipes from meals, on the menu index page
+- update dynamically source.details field when changing the type of a source, when updating a recipe
 - Update the show all recipe pictures, not just the first one
 - Add the possibility to upload pictures for recipes- Menus
 - Add users / user profiles to the application
@@ -9,8 +11,10 @@ TODO :
 - improve error UI when an error occur on forms
 - lower ingredients before registering them in the db
 - Add translations
+- Improve the UI to handle menus and meals
 
 DONE: 
+- possibility to create menus with meals with recipes
 - improve how the ingredients are displayed in recipes
 - add sources to each recipe : link to a website, recipe cookbook with photo, author, ...
 - improve the way to add tags to recipes

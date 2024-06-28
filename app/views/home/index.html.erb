@@ -1,8 +1,8 @@
 <div class="row">
-  <h1>Today's Menu </h1>
+  <h1>On Today's Menu </h1>
   <% Meal.where(date: DateTime.now).each do |meal| %>
     <% if meal.recipes.count > 0 %>
-      <h3>Meal</h3>
+      <h3>Meals</h3>
       <div class="row mb-3">
         <div class="col-md-<%= [meal.recipes.count*2,12].min %> card-group text-center" >
           <% meal.recipes.each do |recipe| %>
