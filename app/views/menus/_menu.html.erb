@@ -2,14 +2,27 @@
   <div class="card-group text-center">
     <% (menu.start_date..menu.end_date).to_a.each do |date| %>
       <div class="card shadow-sm">
-        <div class="card-header"> 
-          <%= date.strftime("%A, %B %d") %>
+        <div class="card-header d-flex">
+          <div class="flex-grow-1 align-self-center">
+            <%= date.strftime("%A, %B %d") %> 
+          </div>
+          <span class="dropdown">
+            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis"></i></button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#"><i class="fa fa-plus me-2"></i>Add Meal</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa fa-scroll me-2"></i>Ingredients</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#"><i class="fa fa-broom me-2"></i>Clear Meals</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa fa-trash me-2"></i>Detele Whole Menu</a></li>
+            </ul>
+          </span>
         </div>
         <div class="card-body">
           <% menu.meals.where(date: date).each_with_index do |meal, index| %>
             <%= render meal %>
           <% end %>
-          <%= button_to 'add meal', meals_path, params: { menu: menu, meal: { date: date }}, class: 'btn btn-outline-primary' %>
+          <%# button_to 'add meal', meals_path, params: { menu: menu, meal: { date: date }}, class: 'btn btn-outline-primary btn-sm' %>
+          <%= button_to meals_path, params: { menu: menu, meal: { date: date }}, class: 'btn btn-outline-primary btn-sm' do %><i class="fa fa-plus me-2"></i><i class="fa-solid fa-utensils"></i><% end %>
         </div>
       </div>
     <% end %>
