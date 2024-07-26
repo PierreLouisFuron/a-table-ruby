@@ -14,4 +14,15 @@ class Source < ApplicationRecord
     course: 4
   }
 
+  def fa_icon
+    fa_mapping = {
+      other: 'circle-question',
+      website: 'earth-europe',
+      cookbook: 'book',
+      person: 'user',
+      course: 'school'
+    }
+    fa_mapping[self.source_type.to_sym]
+  end
+
 end

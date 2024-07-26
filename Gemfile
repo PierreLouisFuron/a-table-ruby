@@ -6,7 +6,7 @@ ruby "3.2.2"
 gem 'bootstrap'
 
 gem 'chronic_duration'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 gem 'material_icons'
 
 gem 'jquery-rails'

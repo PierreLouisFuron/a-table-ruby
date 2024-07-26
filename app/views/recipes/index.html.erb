@@ -22,7 +22,7 @@
 
     <div class="input-group flex-fill mt-2">
       <%= form.text_field :search, placeholder: 'Cake, Salad, Egg, Watermelon, ...', class: 'form-control' %>
-      <%= form.submit 'Search', class: 'btn btn-primary' %>
+      <%= button_tag( class: 'btn btn-primary') do %><i class="fa-solid fa-magnifying-glass"></i><% end %>
     </div>
   </div>
 <% end %>

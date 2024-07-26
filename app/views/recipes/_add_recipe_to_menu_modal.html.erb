@@ -1,0 +1,31 @@
+<div class="modal fade" id="addToMenuModal" tabindex="-1" aria-labelledby="addToMenuModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_with url: recipe_add_to_meals_path(recipe), method: :post do |f| %>
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addToMenuModalLabel">Add Recipe to a Menu</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <% menus.each_with_index do |menu, index| %>
+            <h5 class="<% if menus.count > 1 and index > 0 %>mt-3<% end %>">Menu <%= index + 1 %></h5>
+            <ul class="list-group list-group-flush">
+              <%= f.collection_check_boxes(:meal_ids, menu.meals, :id, :date, checked: @recipe.meal_ids) do |meal| %>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div class="">
+                    <%= meal.check_box(class: 'form-check-input me-1') %>
+                    <%= meal.label(class: 'form-check-label stretched-link') %><% if Date.parse(meal.label) == Date.today %> (Today)<% end %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= f.submit "Save changes", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

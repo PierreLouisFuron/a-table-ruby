@@ -1,0 +1,22 @@
+<% if Recipe.joins(:meals).where('meals.date = ?', date).count == 0 %>
+  <div class="col-12">
+    <h4>Nothing at the moment 😢 </h4>
+  </div>
+<% else %>
+  <% meals.each do |meal| %>
+    <% if meal.recipes.count > 0 %>
+      <h3>Meal</h3>
+      <div class="col-sm-<%= [meal.recipes.count*2,12].min %> card-group text-center mb-3" >
+        <% meal.recipes.each do |recipe| %>
+          <%= link_to recipe, class: "card shadow-sm" do %>
+            <!--div class="card-title"> test </div-->
+            <%= image_tag recipe.get_square_thumbnail, class: 'card-img-top bg-danger', alt: 'menu' %>
+            <div class="card-body">
+                <p class="card-text"><%= recipe.name %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

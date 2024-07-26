@@ -99,6 +99,18 @@ class RecipesController < ApplicationController
     end
   end
 
+  def add_recipe_to_meals
+    meal_ids = params[:meal_ids] || [] # Defaults to empty array if no meals are selected
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe.meal_ids = meal_ids
+    if @recipe.save
+      redirect_to @recipe, notice: 'Meals were successfully updated.'
+    else
+      @meals = Meal.all
+      render :show, alert: 'There was an error updating meals.'
+    end
+  end
+
   private
 
     def create_new_tags

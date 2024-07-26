@@ -14,12 +14,14 @@
           <% end %>
           <div class="carousel-inner">
             <% meal.recipes.each_with_index do |recipe, index| %>
-              <div class="carousel-item <%= 'active' if index == 0 %>">
-                <%= image_tag recipe.get_cover_image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
-                <div class="carousel-caption">
-                  <%= recipe.name %>
+              <%# link_to recipe do %>
+                <div class="carousel-item <%= 'active' if index == 0 %>">
+                  <%= image_tag recipe.get_cover_image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
+                  <div class="carousel-caption">
+                    <%= recipe.name %>
+                  </div>
                 </div>
-              </div>
+              <%# end %>
             <% end %>
           </div>
           <% if meal.recipes.count > 1 %>
@@ -53,7 +55,7 @@
               <div class="input-group">
                 <%= form.text_field :query, placeholder: "Search for recipes...", class: 'form-control' %>
                 <%= form.hidden_field :meal_id, value: meal.id %>
-                <%= form.submit "Search", class: 'btn btn-primary' %>
+                <%= button_tag( class: 'btn btn-primary') do %><i class="fa-solid fa-magnifying-glass"></i><% end %>
               </div>
             <% end %>
             <%= turbo_frame_tag "search_results_#{meal.id}" %>

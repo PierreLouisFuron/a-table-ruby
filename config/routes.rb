@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :recipes do
     resources :images, only: [:index]
     delete 'image/:id', to: 'recipes#destroy_image', as: 'destroy_image'
+    post 'add_to_meals', to: 'recipes#add_recipe_to_meals'
   end
   # get "menus", to: "menus#index"
   # post 'menus', to: 'menus#create'

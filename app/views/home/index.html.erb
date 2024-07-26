@@ -1,21 +1,25 @@
 <div class="row">
   <h1>On Today's Menu </h1>
-  <% Meal.where(date: DateTime.now).each do |meal| %>
-    <% if meal.recipes.count > 0 %>
-      <h3>Meals</h3>
-      <div class="row mb-3">
-        <div class="col-md-<%= [meal.recipes.count*2,12].min %> card-group text-center" >
-          <% meal.recipes.each do |recipe| %>
-            <%= link_to recipe, class: "card shadow-sm" do %>
-              <!--div class="card-title"> test </div-->
-              <%= image_tag recipe.get_square_thumbnail, class: 'card-img-top bg-danger', alt: 'menu' %>
-              <div class="card-body">
-                <p class="card-text"><%= recipe.name %></p>
-              </div>
-            <% end %>
+  <%= render 'meals', meals: @meals_of_the_day, date: DateTime.now %>
+
+  <h1>And Tomorrow </h1>
+  <%= render 'meals', meals: @meals_of_tomorrow, date: DateTime.tomorrow %>
+
+
+  <div class="col-12">
+    <h1> Other Upcoming Deliciously Tasty Recipes </h1>
+    <% if @recipes_of_the_future.count == 0 %>
+    <h4>Nothing at the moment 😢 </h4>
+    <% else %>
+      <div class="list-group">
+        <% @recipes_of_the_future.each do |recipe| %>
+          <%= link_to recipe, class: "list-group-item" do %>
+            <%= recipe.name %>
           <% end %>
-        </div>
+          <%# image_tag recipe.get_square_thumbnail, class: 'card-img-top bg-danger', alt: 'menu' %>
+        <% end %>
       </div>
     <% end %>
-  <% end %>
+  </div>
+
 </div>
