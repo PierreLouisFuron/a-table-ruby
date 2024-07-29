@@ -1,6 +1,7 @@
 class MenusController < ApplicationController
 
   before_action :ongoing_menus, only: [:index]
+  before_action :set_menu, only: %i[ destroy ]
 
   def index
     # @menus = Menu.where("end_date >= ?", Date.today)
@@ -73,11 +74,24 @@ class MenusController < ApplicationController
       # render json: { menu_count: session[:menu_count] }
     end
 
-    def ongoing_menus
-      @menus = Menu.where("end_date >= ?", Date.today)
+    def destroy
+      @menu.destroy
+
+      respond_to do |format|
+        format.html { redirect_to menus_path}
+        format.json { head :no_content }
+      end
     end
 
   private
+
+  def set_menu
+    @menu = Menu.find(params[:id])
+  end
+
+  def ongoing_menus
+    @menus = Menu.where("end_date >= ?", Date.today)
+  end
 
   def menu_params
     params.require(:menu).permit(:start_date, :end_date)

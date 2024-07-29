@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # get "menus", to: "menus#index"
   # post 'menus', to: 'menus#create'
 
-  resources :menus, only: [:index, :create]
+  resources :menus, only: [:index, :create, :destroy]
   post '/update_menu_count', to: 'menus#update_menu_count'
   # get '/add_recipe_to_menu', to: 'menus#add_recipe_to_menu'
   #
