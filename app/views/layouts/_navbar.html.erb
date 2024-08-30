@@ -21,5 +21,15 @@
                 </ul>
             </div>
         </div>
+        <%= form_with(url: recipes_path, method: 'get', local: true, class: 'd-flex') do |form| %>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <%= hidden_field_tag :include_recipes, 1 %>
+                    <div class="input-group flex-fill mt-2">
+                        <%= form.text_field :search, placeholder: 'Search for recipes', class: 'form-control' %>
+                    </div>
+                </li>
+            </ul>
+        <% end %>
     </div>
 </nav>
