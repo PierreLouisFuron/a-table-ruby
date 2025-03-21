@@ -28,49 +28,45 @@
     </div>
   </div>
 
-  <div class="col-md-8 mb-3">
-    <div class="d-flex justify-content-between">
-      <h2 class="text-capitalize">
-        <%= @recipe.name %>
-      </h2>
-      
-      
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Actions
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addToMenuModal"><i class="fa fa-calendar-day me-2"></i> Add to Menu</button>
-          </li>
-          <li><%= link_to edit_recipe_path(@recipe), class: "dropdown-item" do %><i class="fa fa-pencil me-1"></i> Edit<% end %></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><%= link_to @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'dropdown-item' do %><i class="fa fa-trash me-1"></i>       Destroy<% end %></li>
-        </ul>
+  <div class="col-md-8 mb-3 d-flex justify-content-between flex-column">
+    <div>
+      <div class="d-flex justify-content-between">
+        <h2 class="text-capitalize">
+          <%= @recipe.name %>
+        </h2>
+        
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Actions
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><%= link_to edit_recipe_path(@recipe), class: "dropdown-item" do %><i class="fa fa-pencil me-1"></i> Edit<% end %></li>
+            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addToMenuModal"><i class="fa fa-calendar-day me-2"></i> Add to Menu</button></li>
+            <li><%= link_to "#", class: "dropdown-item" do %><i class="fa fa-scroll me-1"></i> Ingredients List<% end %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'dropdown-item' do %><i class="fa fa-trash me-1"></i> Destroy<% end %></li>
+          </ul>
+        </div>
       </div>
-      <!--div>
-        <div class="btn btn-primary">Add to Menu</div>
-        <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary" %>
-        <%= link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'btn btn-danger' %>
-      </div-->
+      <%= render 'add_recipe_to_menu_modal', recipe: @recipe, menus: Menu.where("end_date >= ?", Date.today) %>
+      <% @recipe.tags.each do |tag| %>
+        <span class="badge rounded-pill text-bg-primary mb-2"><%= tag.name %></span>
+      <% end %>
+      <ul class="list-group list-group-horizontal-sm mb-3">
+        <% if @recipe.prep_time? %>
+          <li class="list-group-item">Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
+        <% end %>
+        <% if @recipe.cooking_time? %>
+          <li class="list-group-item">Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
+        <% end %>
+        <% if @recipe.servings? %>
+          <li class="list-group-item"> Servings : <strong><%= @recipe.servings %></strong></li>
+        <% end %>
+      </ul>
     </div>
-    <%= render 'add_recipe_to_menu_modal', recipe: @recipe, menus: Menu.where("end_date >= ?", Date.today) %>
 
-    <% @recipe.tags.each do |tag| %>
-      <span class="badge rounded-pill text-bg-primary mb-2"><%= tag.name %></span>
-    <% end %>
-    <ul class="list-group list-group-horizontal-sm mb-3">
-      <% if @recipe.prep_time? %>
-        <li class="list-group-item">Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
-      <% end %>
-      <% if @recipe.cooking_time? %>
-        <li class="list-group-item">Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
-      <% end %>
-      <% if @recipe.servings? %>
-        <li class="list-group-item"> Servings : <strong><%= @recipe.servings %></strong></li>
-      <% end %>
-    </ul>
+    <%= render 'sources', recipe: @recipe %>  
   </div>
-  
 </div>
 
 <div class="row">
@@ -99,24 +95,3 @@
     </div>
   </div>
 </div>
-
-<% if @recipe.sources.any? %>
-  <div class="row mt-2 mb-2">
-    <div class="col-12 d-flex">
-      <hr class="flex-grow-1"><h6 class="mx-3">Sources</h6><hr class="flex-grow-1">
-    </div>
-  </div>
-  <ul class="list-group list-group-flush">
-    <% @recipe.recipe_sources.each do |rs| %>
-      <li class="list-group-item">
-        <i class="fa fa-<%= rs.source.fa_icon%> me-2"></i>
-        <% if rs.source.website? %>
-          <%= link_to rs.source.name, rs.details %>
-        <% else %>
-          <%= rs.source.name %>
-          <% unless rs.details.nil? %> - <%= rs.details %><% end %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>

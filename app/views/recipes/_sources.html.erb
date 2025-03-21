@@ -1,0 +1,22 @@
+<div>
+  <% if @recipe.sources.any? %>
+    <div class="row mt-2 mb-2">
+      <div class="col-12 d-flex">
+        <hr class="flex-grow-1"><h6 class="mx-3">Sources</h6><hr class="flex-grow-1">
+      </div>
+    </div>
+    <div class="d-flex flex-wrap">
+      <% @recipe.recipe_sources.each_with_index do |rs, index| %>
+        <div class="me-3">
+          <i class="fa fa-<%= rs.source.fa_icon%>"></i>
+          <% if rs.source.website? %>
+            <%= link_to rs.source.name, rs.details %>
+          <% else %>
+            <%= rs.source.name %>
+            <% unless rs.details.nil? %> - <%= rs.details %><% end %>
+          <% end %>
+        </div>
+      <% end %>         
+    </div>
+  <% end %>
+</div>
