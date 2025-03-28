@@ -17,9 +17,9 @@
             </ul>
           </span>
         </div>
-        <div class="card-body">
+        <div class="card-body p-0">
           <% menu.meals.where(date: date).each_with_index do |meal, index| %>
-            <% if index > 0 %> <hr> <% end %>
+            <% if index > 0 %> <div class="mt-1"></div> <% end %>
             <%= render meal %>
           <% end %>
         </div>
