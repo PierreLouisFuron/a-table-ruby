@@ -48,7 +48,7 @@
           </ul>
         </div>
       </div>
-      <%= render 'add_recipe_to_menu_modal', recipe: @recipe, menus: Menu.where("end_date >= ?", Date.today) %>
+      <%= render 'add_recipe_to_meals_modal', recipe: @recipe, menus: Menu.where("end_date >= ?", Date.today) %>
       <% @recipe.tags.each do |tag| %>
         <span class="badge rounded-pill text-bg-primary mb-2"><%= tag.name %></span>
       <% end %>
