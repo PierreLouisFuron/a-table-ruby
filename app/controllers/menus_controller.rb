@@ -1,17 +1,16 @@
 class MenusController < ApplicationController
 
-  before_action :ongoing_menus, only: [:index]
   before_action :set_menu, only: %i[ destroy ]
 
   def index
-    # @menus = Menu.where("end_date >= ?", Date.today)
+    @menus = Menu.ongoing
 
-    session[:menu_count] ||= 7
-    @recipes = []
-    ids = Recipe.pluck(:id)
-    (1..session[:menu_count]).each do
-      @recipes << Recipe.find(ids.sample)
-    end
+    # session[:menu_count] ||= 7
+    # @recipes = []
+    # ids = Recipe.pluck(:id)
+    # (1..session[:menu_count]).each do
+    #   @recipes << Recipe.find(ids.sample)
+    # end
   end
 
   def create
@@ -55,42 +54,38 @@ class MenusController < ApplicationController
   end
 
   def update_menu_count
-      if params[:menu_action] == 'increase'
-          session[:menu_count] ||= 0
-          session[:menu_count] += 1
-      elsif params[:menu_action] == 'decrease'
-          session[:menu_count] = [0, session[:menu_count].to_i - 1].max
-      end
-
-      redirect_to menus_path
-
-      # if params[:menu][:action] == 'increase'
-      #     session[:menu_count] ||= 0
-      #     session[:menu_count] += 1
-      # elsif params[:menu][:action] == 'decrease'
-      #     session[:menu_count] = [0, session[:menu_count].to_i - 1].max
-      # end
-
-      # render json: { menu_count: session[:menu_count] }
+    if params[:menu_action] == 'increase'
+        session[:menu_count] ||= 0
+        session[:menu_count] += 1
+    elsif params[:menu_action] == 'decrease'
+        session[:menu_count] = [0, session[:menu_count].to_i - 1].max
     end
 
-    def destroy
-      @menu.destroy
+    redirect_to menus_path
 
-      respond_to do |format|
-        format.html { redirect_to menus_path}
-        format.json { head :no_content }
-      end
+    # if params[:menu][:action] == 'increase'
+    #     session[:menu_count] ||= 0
+    #     session[:menu_count] += 1
+    # elsif params[:menu][:action] == 'decrease'
+    #     session[:menu_count] = [0, session[:menu_count].to_i - 1].max
+    # end
+
+    # render json: { menu_count: session[:menu_count] }
+  end
+
+  def destroy
+    @menu.destroy
+
+    respond_to do |format|
+      format.html { redirect_to menus_path}
+      format.json { head :no_content }
     end
+  end
 
   private
 
   def set_menu
     @menu = Menu.find(params[:id])
-  end
-
-  def ongoing_menus
-    @menus = Menu.where("end_date >= ?", Date.today)
   end
 
   def menu_params
