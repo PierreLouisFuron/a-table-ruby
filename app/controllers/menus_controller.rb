@@ -28,7 +28,7 @@ class MenusController < ApplicationController
     end
   end
 
-  def add_recipe_to_menu
+  def add_recipe_to_meal
     recipe = Recipe.find(params['recipe_id'])
     meal = Meal.find(params['meal_id'])
     meal.recipes << recipe
@@ -37,7 +37,7 @@ class MenusController < ApplicationController
     end
   end
 
-  def remove_recipe_from_menu
+  def remove_recipe_from_meal
     recipe = Recipe.find(params['recipe_id'])
     meal = Meal.find(params['meal_id'])
     meal.recipes.delete(recipe)

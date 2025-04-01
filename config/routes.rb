@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   post '/update_menu_count', to: 'menus#update_menu_count'
   # get '/add_recipe_to_menu', to: 'menus#add_recipe_to_menu'
   #
-  post '/add_recipe_to_menu', to: 'menus#add_recipe_to_menu'
-  post '/remove_recipe_from_menu', to: 'menus#remove_recipe_from_menu'
+  post '/add_recipe_to_meal', to: 'menus#add_recipe_to_meal'
+  post '/remove_recipe_from_meal', to: 'menus#remove_recipe_from_meal'
   post '/update_meal', to: 'menus#update_meal'
 
   post 'meals', to: 'meals#create'
