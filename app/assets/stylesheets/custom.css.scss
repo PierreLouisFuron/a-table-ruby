@@ -3,6 +3,13 @@
 @import "material_icons";
 @import url("https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.min.css");
 
+
+.menu-meal-carrousel {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+}
+
 .responsive-height {
     max-height: 138px;
 }

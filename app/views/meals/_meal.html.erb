@@ -1,22 +1,22 @@
-<div class="d-flex">
-  <div class="card-text flex-fill">
+<div class="d-flex" style="height: 170px;">
+  <div class="card-text flex-fill" >
     <%= turbo_frame_tag "tft_meal_#{meal.id}" do %>
       <% if meal.recipes.count == 0 %>
         <div class="p-3">Empty meal</div>
       <%else %>
-        <div id="carousel_meal_<%= meal.id %>" class="carousel slide">
+        <div id="carousel_meal_<%= meal.id %>" class="carousel slide" style="height: 100%;"> 
           <% if meal.recipes.count > 1 %>
-            <div class="carousel-indicators">
+            <div class="carousel-indicators" >
               <% (0..meal.recipes.count-1).each do |index| %>
                 <button type="button" data-bs-target="#carousel_meal_<%= meal.id %>" data-bs-slide-to="<%=index%>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index+1%>"></button>
               <% end %>
             </div>
           <% end %>
-          <div class="carousel-inner">
+          <div class="carousel-inner" style="height: inherit;">
             <% meal.recipes.each_with_index do |recipe, index| %>
               <%# link_to recipe do %>
-                <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <%= image_tag recipe.get_cover_image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
+                <div class="carousel-item <%= 'active' if index == 0 %>" style="height: inherit;">
+                  <%= image_tag recipe.get_cover_image, class: 'menu-meal-carrousel img-fluid rounded shadow-sm', alt: 'menu', style: 'height: inherit;'%>
                   <div class="carousel-caption">
                     <%= recipe.name %>
                   </div>
@@ -37,7 +37,6 @@
         </div>
       <% end %>
     <% end %>
-
   </div>
   <div class="position-relative">
     <!-- Button trigger modal -->
