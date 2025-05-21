@@ -12,7 +12,7 @@ development:
 
 test:
   <<: *default
-  host: a-table-postgres
+  host: localhost
   database: a_table_test
 
 production:
