@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["icon"]
+  static targets = ["icon", "switch"]
 
   connect() {
     this.applyTheme()
@@ -20,8 +20,7 @@ export default class extends Controller {
   }
 
   toggle() {
-    const current = document.documentElement.getAttribute("data-bs-theme") || "light"
-    const next = current === "dark" ? "light" : "dark"
+    const next = this.hasSwitchTarget && this.switchTarget.checked ? "dark" : "light"
     localStorage.setItem("theme", next)
     this.setTheme(next)
   }
@@ -38,12 +37,17 @@ export default class extends Controller {
 
   setTheme(theme) {
     document.documentElement.setAttribute("data-bs-theme", theme)
-    this.updateIcon(theme)
+    // this.updateSwitch(theme)
   }
 
-  updateIcon(theme) {
-    if (this.hasIconTarget) {
-      this.iconTarget.className = theme === "dark" ? "fa fa-sun" : "fa fa-moon"
-    }
+  switchTargetConnected(element) {
+    const theme = document.documentElement.getAttribute("data-bs-theme") || "light"
+    element.checked = theme === "dark"
   }
+
+  // updateSwitch(theme) {
+  //   if (this.hasSwitchTarget) {
+  //     this.switchTarget.checked = theme === "dark"
+  //   }
+  // }
 }

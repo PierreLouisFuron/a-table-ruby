@@ -31,12 +31,17 @@
                 </li>
             </ul>
         <% end %>
-        <button class="btn btn-link nav-link ms-2 px-2"
-                type="button"
-                data-action="theme#toggle"
-                title="Toggle dark mode"
-                aria-label="Toggle dark mode">
-            <i class="fa fa-moon" data-theme-target="icon"></i>
-        </button>
+        <div class="form-check form-switch ms-2 d-flex align-items-center mb-0">
+            <input class="form-check-input"
+                   type="checkbox"
+                   role="switch"
+                   id="darkModeSwitch"
+                   data-action="theme#toggle"
+                   data-theme-target="switch"
+                   aria-label="Toggle dark mode">
+            <label class="form-check-label ms-1" for="darkModeSwitch">
+                <i class="fa fa-moon" data-theme-target="icon"></i>
+            </label>
+        </div>
     </div>
 </nav>
