@@ -3,80 +3,130 @@
 @import "material_icons";
 @import url("https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.min.css");
 
+// ============================================================
+// Theme color variables
+// ============================================================
+:root,
+[data-bs-theme="light"] {
+  --at-accent: #2effc9;
+  --at-accent-hover: #2ce7b6;
+  --at-accent-text: darkslategray;
+  --at-navbar-bg: #2effc9;
+  --at-alert-success-bg: #BFFFEF;
+  --at-alert-success-border: #BFFFEF;
+  --at-alert-success-text: #29715F;
+}
 
+[data-bs-theme="dark"] {
+  --at-accent: #26d4a8;
+  --at-accent-hover: #20b892;
+  --at-accent-text: #e0e0e0;
+  --at-navbar-bg: #1a3a30;
+  --at-alert-success-bg: #1a3a2e;
+  --at-alert-success-border: #26d4a8;
+  --at-alert-success-text: #7edcbe;
+
+  // Tom-Select dark mode overrides
+  .ts-wrapper .ts-control,
+  .ts-wrapper .ts-dropdown {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color);
+  }
+
+  .ts-wrapper .ts-control input {
+    color: var(--bs-body-color);
+  }
+
+  .ts-dropdown .active {
+    background-color: var(--at-accent);
+    color: var(--at-accent-text);
+  }
+}
+
+// ============================================================
+// Layout utility classes
+// ============================================================
 .menu-meal-carrousel {
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
 }
 
 .responsive-height {
-    max-height: 138px;
-}
-  
-.recipe-card {
-    height: 150;
+  max-height: 138px;
 }
 
+.recipe-card {
+  height: 150px;
+}
+
+// ============================================================
+// Component overrides using theme variables
+// ============================================================
 .alert-success {
-    background-color:  #BFFFEF;
-    border-color:  #BFFFEF;
-    color: #29715F;
+  background-color: var(--at-alert-success-bg);
+  border-color: var(--at-alert-success-border);
+  color: var(--at-alert-success-text);
 }
 
 .navbar {
-    background-color:  #2effc9;
+  background-color: var(--at-navbar-bg);
 }
 
 .btn-primary {
-    background-color:  #2effc9  ;
-    border-color:  #2effc9  ;
-    color: darkslategray;
+  background-color: var(--at-accent);
+  border-color: var(--at-accent);
+  color: var(--at-accent-text);
 }
 
 .btn-primary:hover {
-    background-color:  #2ce7b6  ;
-    border-color:  #2ce7b6  ;
-    color: darkslategray;
+  background-color: var(--at-accent-hover);
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
 }
 
 .btn-primary:active {
-    background-color:  pink  ;
-    border-color:  pink  ;
-    color: pink;
+  background-color: var(--at-accent-hover);
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
 }
 
 .btn-primary:focus {
-    background-color:  #2ce7b6  ;
-    border-color:  #2ce7b6  ;
-    color: darkslategray;
+  background-color: var(--at-accent-hover);
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
 }
 
-.btn-outline-primary { 
-    border-color:  #2effc9;
-    color: darkslategray;
-    --bs-btn-hover-bg: #2effc9;
-    --bs-btn-hover-border-color: #2effc9;
+.btn-outline-primary {
+  border-color: var(--at-accent);
+  color: var(--at-accent-text);
+  --bs-btn-hover-bg: var(--at-accent);
+  --bs-btn-hover-border-color: var(--at-accent);
 }
 
-.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show { 
-    background-color: #2effc9;
-    border-color: #2effc9;
-    color: darkslategray;
+.btn-check:checked + .btn,
+:not(.btn-check) + .btn:active,
+.btn:first-child:active,
+.btn.active,
+.btn.show {
+  background-color: var(--at-accent);
+  border-color: var(--at-accent);
+  color: var(--at-accent-text);
 }
 
 .btn-outline-primary:hover {
-    border-color:  #2ce7b6  ;
-    color: darkslategray;
-    --bs-btn-hover-bg: #2effc9;
-    --bs-btn-hover-border-color: #2effc9;
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
+  --bs-btn-hover-bg: var(--at-accent);
+  --bs-btn-hover-border-color: var(--at-accent);
 }
 
 .btn-outline-primary:focus {
-    border-color:  #2ce7b6  ;
-    color: darkslategray;
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
 }
 
 .card-footer {
-    border-top: none;
+  border-top: none;
 }

@@ -5,7 +5,7 @@
         <div class="col-4  ">
           <%= image_tag recipe.get_square_thumbnail, class: 'responsive-height rounded-start', alt: 'menu' %>
         </div>
-        <div class="col-8 bg-white rounded-end d-flex flex-column">
+        <div class="col-8 bg-body rounded-end d-flex flex-column">
           <div class="card-body">
             <h6 class="card-title text-capitalize"><%= recipe.name %></h6>
             <% recipe.tags.each do |tag| %>
