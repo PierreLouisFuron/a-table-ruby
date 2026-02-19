@@ -37,7 +37,6 @@ export default class extends Controller {
 
   setTheme(theme) {
     document.documentElement.setAttribute("data-bs-theme", theme)
-    // this.updateSwitch(theme)
   }
 
   switchTargetConnected(element) {
@@ -45,9 +44,4 @@ export default class extends Controller {
     element.checked = theme === "dark"
   }
 
-  // updateSwitch(theme) {
-  //   if (this.hasSwitchTarget) {
-  //     this.switchTarget.checked = theme === "dark"
-  //   }
-  // }
 }
