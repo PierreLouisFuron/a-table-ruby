@@ -11,7 +11,7 @@
                 <h5 class="offcanvas-title" id="sidebarLabel"><%= link_to 'A Table', root_path, class: 'navbar-brand' %></h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
+            <div class="offcanvas-body d-flex flex-column">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><%= link_to 'Menus', menus_path, class: 'nav-link'%></li>
                     <li class="nav-item"><%= link_to 'Recipes', recipes_path, class: 'nav-link'%></li>
@@ -19,19 +19,21 @@
                     <li class="nav-item"><a class="nav-link" href="#">Sources</a></li>
                     <li class="nav-item"><%= link_to 'Dev', dev_path, class: 'nav-link'%></li>
                 </ul>
+                <div class="form-check form-switch d-flex align-items-center mb-0 mt-auto d-md-none">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           id="darkModeSwitchSidebar"
+                           data-action="theme#toggle"
+                           data-theme-target="switch"
+                           aria-label="Toggle dark mode">
+                    <label class="form-check-label ms-2" for="darkModeSwitchSidebar">
+                        <i class="fa fa-moon" data-theme-target="icon"></i> Dark mode
+                    </label>
+                </div>
             </div>
         </div>
-        <%= form_with(url: recipes_path, method: 'get', local: true, class: 'd-flex') do |form| %>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <%= hidden_field_tag :include_recipes, 1 %>
-                    <div class="input-group flex-fill mt-2">
-                        <%= form.text_field :search, placeholder: 'Search for recipes', class: 'form-control' %>
-                    </div>
-                </li>
-            </ul>
-        <% end %>
-        <div class="form-check form-switch ms-2 d-flex align-items-center mb-0">
+        <div class="form-check form-switch me-2 d-none d-md-flex align-items-center mb-0">
             <input class="form-check-input"
                    type="checkbox"
                    role="switch"
@@ -43,5 +45,15 @@
                 <i class="fa fa-moon" data-theme-target="icon"></i>
             </label>
         </div>
+        <%= form_with(url: recipes_path, method: 'get', local: true, class: 'd-flex') do |form| %>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <%= hidden_field_tag :include_recipes, 1 %>
+                    <div class="input-group flex-fill mt-2">
+                        <%= form.text_field :search, placeholder: 'Search for recipes', class: 'form-control' %>
+                    </div>
+                </li>
+            </ul>
+        <% end %>
     </div>
 </nav>

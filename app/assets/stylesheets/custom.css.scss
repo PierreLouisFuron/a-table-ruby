@@ -130,3 +130,13 @@
 .card-footer {
   border-top: none;
 }
+
+.form-switch .form-check-input:checked {
+  background-color: var(--at-accent);
+  border-color: var(--at-accent-hover);
+}
+
+.form-switch .form-check-input:focus {
+  border-color: var(--at-accent-hover);
+  box-shadow: 0 0 0 0.25rem rgba(46, 255, 201, 0.25);
+}
