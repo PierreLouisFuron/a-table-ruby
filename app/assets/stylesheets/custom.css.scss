@@ -4,47 +4,6 @@
 @import url("https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.min.css");
 
 // ============================================================
-// Theme color variables
-// ============================================================
-:root,
-[data-bs-theme="light"] {
-  --at-accent: #2effc9;
-  --at-accent-hover: #2ce7b6;
-  --at-accent-text: darkslategray;
-  --at-navbar-bg: #2effc9;
-  --at-alert-success-bg: #BFFFEF;
-  --at-alert-success-border: #BFFFEF;
-  --at-alert-success-text: #29715F;
-}
-
-[data-bs-theme="dark"] {
-  --at-accent: #2eedb8;
-  --at-accent-hover: #26d4a8;
-  --at-accent-text: darkslategray;
-  --at-navbar-bg: #2effc9;
-  --at-alert-success-bg: #1a3a2e;
-  --at-alert-success-border: #26d4a8;
-  --at-alert-success-text: #7edcbe;
-
-  // Tom-Select dark mode overrides
-  .ts-wrapper .ts-control,
-  .ts-wrapper .ts-dropdown {
-    background-color: var(--bs-body-bg);
-    color: var(--bs-body-color);
-    border-color: var(--bs-border-color);
-  }
-
-  .ts-wrapper .ts-control input {
-    color: var(--bs-body-color);
-  }
-
-  .ts-dropdown .active {
-    background-color: var(--at-accent);
-    color: var(--at-accent-text);
-  }
-}
-
-// ============================================================
 // Layout utility classes
 // ============================================================
 .menu-meal-carrousel {
@@ -68,49 +27,6 @@
   background-color: var(--at-alert-success-bg);
   border-color: var(--at-alert-success-border);
   color: var(--at-alert-success-text);
-}
-
-.navbar {
-  background-color: var(--at-navbar-bg);
-  --bs-navbar-color: darkslategray;
-  --bs-navbar-brand-color: darkslategray;
-  --bs-navbar-brand-hover-color: darkslategray;
-  --bs-navbar-active-color: darkslategray;
-  --bs-navbar-hover-color: #1a2f2f;
-  --bs-nav-link-hover-color: #1a2f2f;
-
-  .navbar-toggler-icon {
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    background-image: var(--bs-navbar-toggler-icon-bg);
-  }
-
-  @media (max-width: 767.98px) {
-    .offcanvas {
-      --bs-navbar-color: var(--bs-body-color);
-      --bs-navbar-hover-color: var(--bs-body-color);
-      --bs-nav-link-hover-color: var(--bs-body-color);
-      --bs-navbar-brand-color: var(--bs-body-color);
-      --bs-navbar-brand-hover-color: var(--bs-body-color);
-
-      .form-check-label {
-        color: var(--bs-body-color);
-      }
-    }
-  }
-
-  .form-check-label {
-    color: darkslategray;
-  }
-
-  .form-control {
-    background-color: #fff;
-    color: #212529;
-    border-color: #dee2e6;
-
-    &::placeholder {
-      color: #6c757d;
-    }
-  }
 }
 
 .btn-primary {
