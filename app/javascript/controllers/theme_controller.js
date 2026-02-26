@@ -19,8 +19,8 @@ export default class extends Controller {
     }
   }
 
-  toggle() {
-    const next = this.hasSwitchTarget && this.switchTarget.checked ? "dark" : "light"
+  toggle(event) {
+    const next = event.target.checked ? "dark" : "light"
     localStorage.setItem("theme", next)
     this.setTheme(next)
   }
@@ -37,6 +37,7 @@ export default class extends Controller {
 
   setTheme(theme) {
     document.documentElement.setAttribute("data-bs-theme", theme)
+    this.switchTargets.forEach(el => el.checked = theme === "dark")
   }
 
   switchTargetConnected(element) {

@@ -10,7 +10,7 @@ RSpec.describe 'Dark theme', type: :system do
   end
 
   def toggle_switch
-    find('#darkModeSwitch')
+    find('input[data-theme-target="switch"]', match: :first)
   end
 
   def emulate_color_scheme(scheme)
@@ -38,7 +38,7 @@ RSpec.describe 'Dark theme', type: :system do
       ensure_light_mode
       visit root_path
 
-      expect(page).to have_css('#darkModeSwitch')
+      expect(page).to have_css('input[data-theme-target="switch"]')
       expect(page).to have_css('i[data-theme-target="icon"]')
     end
   end
