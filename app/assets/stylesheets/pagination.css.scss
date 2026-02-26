@@ -1,19 +1,19 @@
 // Pagy pagination system colors
-.page-item.active .page-link{
-    background-color:  #2effc9;
-    border-color:  #2effc9;
-    color:darkslategray;
+.page-item.active .page-link {
+  background-color: var(--at-accent);
+  border-color: var(--at-accent);
+  color: var(--at-accent-text);
 }
 
-.page-item.active .page-link:hover{
-    background-color:  #2ce7b6;
-    border-color:  #2ce7b6;
+.page-item.active .page-link:hover {
+  background-color: var(--at-accent-hover);
+  border-color: var(--at-accent-hover);
 }
 
 .page-link {
-    color: darkslategray;
+  color: var(--at-accent-text);
 }
 
 .page-link:hover {
-    color: darkslategray;
+  color: var(--at-accent-text);
 }

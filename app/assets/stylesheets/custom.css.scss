@@ -3,80 +3,117 @@
 @import "material_icons";
 @import url("https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.min.css");
 
-
+// ============================================================
+// Layout utility classes
+// ============================================================
 .menu-meal-carrousel {
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
 }
 
 .responsive-height {
-    max-height: 138px;
+  max-height: 138px;
 }
-  
+
 .recipe-card {
-    height: 150;
+  height: 150px;
 }
 
+// ============================================================
+// Component overrides using theme variables
+// ============================================================
 .alert-success {
-    background-color:  #BFFFEF;
-    border-color:  #BFFFEF;
-    color: #29715F;
-}
-
-.navbar {
-    background-color:  #2effc9;
+  background-color: var(--at-alert-success-bg);
+  border-color: var(--at-alert-success-border);
+  color: var(--at-alert-success-text);
 }
 
 .btn-primary {
-    background-color:  #2effc9  ;
-    border-color:  #2effc9  ;
-    color: darkslategray;
+  background-color: var(--at-accent);
+  border-color: var(--at-accent);
+  color: var(--at-accent-text);
 }
 
 .btn-primary:hover {
-    background-color:  #2ce7b6  ;
-    border-color:  #2ce7b6  ;
-    color: darkslategray;
+  background-color: var(--at-accent-hover);
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
 }
 
 .btn-primary:active {
-    background-color:  pink  ;
-    border-color:  pink  ;
-    color: pink;
+  background-color: var(--at-accent-hover);
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
 }
 
 .btn-primary:focus {
-    background-color:  #2ce7b6  ;
-    border-color:  #2ce7b6  ;
-    color: darkslategray;
+  background-color: var(--at-accent-hover);
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
 }
 
-.btn-outline-primary { 
-    border-color:  #2effc9;
-    color: darkslategray;
-    --bs-btn-hover-bg: #2effc9;
-    --bs-btn-hover-border-color: #2effc9;
+.btn-outline-primary {
+  border-color: var(--at-accent);
+  color: var(--bs-body-color);
+  --bs-btn-hover-bg: var(--at-accent);
+  --bs-btn-hover-border-color: var(--at-accent);
 }
 
-.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show { 
-    background-color: #2effc9;
-    border-color: #2effc9;
-    color: darkslategray;
+.btn-check:checked + .btn,
+:not(.btn-check) + .btn:active,
+.btn:first-child:active,
+.btn.active,
+.btn.show {
+  background-color: var(--at-accent);
+  border-color: var(--at-accent);
+  color: var(--at-accent-text);
 }
 
 .btn-outline-primary:hover {
-    border-color:  #2ce7b6  ;
-    color: darkslategray;
-    --bs-btn-hover-bg: #2effc9;
-    --bs-btn-hover-border-color: #2effc9;
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
+  --bs-btn-hover-bg: var(--at-accent);
+  --bs-btn-hover-border-color: var(--at-accent);
+}
+
+.btn-check:not(:checked) + .btn-outline-primary:hover {
+  background-color: rgba(46, 255, 201, 0.15);
+  border-color: var(--at-accent-hover);
+  color: var(--bs-body-color);
+}
+
+.btn-check:checked + .btn-outline-primary:hover {
+  background-color: var(--at-accent-hover);
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
 }
 
 .btn-outline-primary:focus {
-    border-color:  #2ce7b6  ;
-    color: darkslategray;
+  border-color: var(--at-accent-hover);
+  color: var(--bs-body-color);
 }
 
 .card-footer {
-    border-top: none;
+  border-top: none;
+}
+
+.form-switch .form-check-input {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0, 0, 0, 0.25)'/%3e%3c/svg%3e");
+
+  &:checked {
+    background-color: var(--at-accent);
+    border-color: var(--at-accent-hover);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  }
+
+  &:focus {
+    border-color: var(--at-accent-hover);
+    box-shadow: 0 0 0 0.25rem rgba(46, 255, 201, 0.25);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0, 0, 0, 0.25)'/%3e%3c/svg%3e");
+  }
+
+  &:checked:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  }
 }

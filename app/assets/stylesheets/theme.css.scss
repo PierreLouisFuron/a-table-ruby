@@ -1,0 +1,40 @@
+// ============================================================
+// Theme color variables
+// ============================================================
+:root,
+[data-bs-theme="light"] {
+  --at-accent: #2effc9;
+  --at-accent-hover: #2ce7b6;
+  --at-accent-text: darkslategray;
+  --at-navbar-bg: #2effc9;
+  --at-alert-success-bg: #BFFFEF;
+  --at-alert-success-border: #BFFFEF;
+  --at-alert-success-text: #29715F;
+}
+
+[data-bs-theme="dark"] {
+  --at-accent: #2eedb8;
+  --at-accent-hover: #26d4a8;
+  --at-accent-text: darkslategray;
+  --at-navbar-bg: #2effc9;
+  --at-alert-success-bg: #1a3a2e;
+  --at-alert-success-border: #26d4a8;
+  --at-alert-success-text: #7edcbe;
+
+  // Tom-Select dark mode overrides
+  .ts-wrapper .ts-control,
+  .ts-wrapper .ts-dropdown {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color);
+  }
+
+  .ts-wrapper .ts-control input {
+    color: var(--bs-body-color);
+  }
+
+  .ts-dropdown .active {
+    background-color: var(--at-accent);
+    color: var(--at-accent-text);
+  }
+}
