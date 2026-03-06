@@ -82,6 +82,19 @@ class MenusController < ApplicationController
     end
   end
 
+  def get_menu_ingredients
+    p 'test'
+    # ingredients = []
+
+    # @menu.meals.each do |meal|
+    #   meal.recipes.each do |recipe|
+    #     recipe.ingredients.each do |ingredient|
+    #       ingredients << ingredient.name
+    #     end
+    #   end
+    # end
+  end
+
   private
 
   def set_menu

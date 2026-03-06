@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   post '/remove_recipe_from_meal', to: 'menus#remove_recipe_from_meal'
   post '/update_meal', to: 'menus#update_meal'
 
+  get 'get_menu_ingredients', to: 'menus#get_menu_ingredients'
+
   post 'meals', to: 'meals#create'
 
   get 'search_recipes', to: 'recipes#search'

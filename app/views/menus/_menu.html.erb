@@ -10,7 +10,9 @@
             <button class="btn btn-outline-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis"></i></button>
             <ul class="dropdown-menu">
               <li><%= button_to meals_path, params: { menu: menu, meal: { date: date }}, class: 'dropdown-item' do %><i class="fa fa-plus me-2"></i>Add Meal<% end %></li>
-              <li><a class="dropdown-item" href="#"><i class="fa fa-scroll me-2"></i>Ingredients <span class="fst-italic fw-light">(Not Working)</span></a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa fa-scroll me-2"></i>Ingredients for the day</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa fa-scroll me-2"></i>Ingredients for the whole menu</a></li>
+              <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#getMenuIngredientsModal"><i class="fa fa-scroll me-2"></i>Ingredients for the whole menu</button></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#"><i class="fa fa-broom me-2"></i>Clear Meals <span class="fst-italic fw-light">(Not Working)</span></a></li>
               <li><%= link_to menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' do %><i class="fa fa-trash me-2"></i>Detele Whole Menu</a><% end %></li>
@@ -26,4 +28,5 @@
       </div>
     <% end %>
   </div>
+  <%= render 'get_menu_ingredients_modal', menu: menu %>
 </div>
