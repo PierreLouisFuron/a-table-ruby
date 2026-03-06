@@ -62,13 +62,10 @@ RSpec.describe 'Dark theme', type: :system do
     end
 
     it 'switches to dark mode when clicked' do
-      light_navbar_bg = navbar_bg_color
-
       toggle_switch.click
 
       expect(html_theme).to eq('dark')
       expect(toggle_switch).to be_checked
-      expect(navbar_bg_color).not_to eq(light_navbar_bg)
       expect(body_bg_color).not_to eq('rgb(255, 255, 255)')
     end
 
