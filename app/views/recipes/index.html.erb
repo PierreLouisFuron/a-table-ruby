@@ -3,21 +3,22 @@
   <div class="ms-auto"><%= link_to "New recipe", new_recipe_path, class: "btn btn-primary" %></div>
 </div>
 
+<% any_filter = [:include_recipes, :include_ingredients, :include_tags, :include_sources].any? { |k| params.has_key?(k) } %>
 <%= form_with(url: recipes_path, method: 'get', local: true) do |form| %>
 
   <div class="d-md-flex">
     <div class="btn-group me-2 mt-2" role="group" aria-label="Basic checkbox toggle button group">
-      <%= form.check_box :include_recipes, { class: 'btn-check', checked: params.keys.any? { |key| key.to_s.start_with?('include_') } ? params.has_key?(:include_recipes) : true, include_hidden: false } %>
-      <%= form.label :include_recipes, "Recipes", class: 'btn btn-outline-primary' %>
+      <%= form.check_box :include_recipes, { class: 'btn-check', id: 'filter_recipes', autocomplete: 'off', include_hidden: false, checked: any_filter ? params.has_key?(:include_recipes) : true } %>
+      <%= form.label :include_recipes, "Recipes", for: 'filter_recipes', class: 'btn btn-outline-primary' %>
 
-      <%= form.check_box :include_ingredients, { class: 'btn-check', include_hidden: false, checked: params.has_key?(:include_ingredients) } %>
-      <%= form.label :include_ingredients, "Ingredients", class: 'btn btn-outline-primary' %>
+      <%= form.check_box :include_ingredients, { class: 'btn-check', id: 'filter_ingredients', autocomplete: 'off', include_hidden: false, checked: params.has_key?(:include_ingredients) } %>
+      <%= form.label :include_ingredients, "Ingredients", for: 'filter_ingredients', class: 'btn btn-outline-primary' %>
 
-      <%= form.check_box :include_tags, { class: 'btn-check', include_hidden: false, checked: params.has_key?(:include_tags) } %>
-      <%= form.label :include_tags, "Tags", class: 'btn btn-outline-primary' %>
+      <%= form.check_box :include_tags, { class: 'btn-check', id: 'filter_tags', autocomplete: 'off', include_hidden: false, checked: params.has_key?(:include_tags) } %>
+      <%= form.label :include_tags, "Tags", for: 'filter_tags', class: 'btn btn-outline-primary' %>
 
-      <%= form.check_box :include_sources, { class: 'btn-check', include_hidden: false, checked: params.has_key?(:include_sources)} %>
-      <%= form.label :include_sources, "Sources", class: 'btn btn-outline-primary' %>
+      <%= form.check_box :include_sources, { class: 'btn-check', id: 'filter_sources', autocomplete: 'off', include_hidden: false, checked: params.has_key?(:include_sources) } %>
+      <%= form.label :include_sources, "Sources", for: 'filter_sources', class: 'btn btn-outline-primary' %>
     </div>
 
     <div class="input-group flex-fill mt-2">

@@ -31,8 +31,9 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     if params[:search]
+      any_filter = [:include_recipes, :include_ingredients, :include_tags, :include_sources].any? { |k| params.has_key?(k) }
       search_options = {
-        include_recipes: params.has_key?(:include_recipes),
+        include_recipes: any_filter ? params.has_key?(:include_recipes) : true,
         include_ingredients: params.has_key?(:include_ingredients),
         include_tags: params.has_key?(:include_tags),
         include_sources: params.has_key?(:include_sources),
