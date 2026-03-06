@@ -2,8 +2,9 @@
 FROM ruby:3.2.2
 
 # Set environment variables for Rails
-ENV RAILS_ENV=test
+ENV RAILS_ENV=production
 ENV RAILS_LOG_TO_STDOUT=true
+ENV RAILS_SERVE_STATIC_FILES=true
 
 # Install dependencies
 RUN apt update -qq && apt install -y \

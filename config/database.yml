@@ -17,3 +17,5 @@ test:
 
 production:
   <<: *default
+  host: a-table-postgres
+  database: a_table_production
