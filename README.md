@@ -37,7 +37,7 @@ Things you may want to cover:
 
 1. ssh server
 2. Pull latest docker image from docker hub <br>`docker pull cybberbobby/a-table(:latest)`
-3. Create network to allow the app and db containers to communicate (if not present already) <br>`docker create network a_table_network`
+3. Create network to allow the app and db containers to communicate (if not present already) <br>`docker network create a_table_network`
 4. Create volume to store the images (if not present already) <br>`docker volume create a_table_images`
 5. Pull and run official postgres container (if not present already) <br>
 `docker run -p 5432:5432 --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
