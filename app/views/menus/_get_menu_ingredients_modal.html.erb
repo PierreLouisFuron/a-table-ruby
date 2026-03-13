@@ -1,11 +1,11 @@
 <div class="modal fade" id="getMenuIngredientsModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="getMenuIngredientsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content" data-controller="clipboard">
       <div class="modal-header">
         <h1 class="modal-title fs-5">Menu's Ingredients</h1>
         <%# button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button %>
       </div>
-      <div class="modal-body text-start">
+      <div class="modal-body text-start" data-clipboard-target="content">
         <ul>
           <% menu.get_menu_ingredients.each do |ingredient| %>
             <li><%= ingredient.name %></li>
@@ -13,6 +13,7 @@
         </ul>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-action="clipboard#copy" data-clipboard-target="button">Copy</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
