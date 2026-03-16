@@ -2,7 +2,7 @@
   <div class="mt-2">
     <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#menu<%= menu.id %>IngredientsListModal"><i class="fa fa-scroll me-2"></i>Ingredients</button>
     <button type="button" class="btn btn-primary mb-2"><i class="fa fa-broom me-2"></i>Clear Meals <span class="fst-italic fw-light">(Not Working)</span></button>
-    <%= link_to menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary mb-2' do %><i class="fa fa-trash me-2"></i>Detele Menu</a><% end %>
+    <%= link_to menu, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-primary mb-2' do %><i class="fa fa-trash me-2"></i>Delete Menu<% end %>
   </div>
   <%= render 'shared/ingredients_list_modal', title: "Menu's Ingredients", ingredients: menu.all_ingredients, modal_id: "menu#{menu.id}IngredientsListModal" %>
   <div class="card-group text-center">
