@@ -5,17 +5,20 @@ export default class extends Controller {
 
   static targets = ["content", "button"]
 
+  static values = {
+    confirm: { type: String, default: 'Copied' },
+    delayMs: { type: Number, default: 3000 }
+  }
+
   copy() {
-    // The text to be copied should come from the content div
     const text = this.contentTarget.innerText
+    const originalContent = this.buttonTarget.innerHTML
     navigator.clipboard.writeText(text)
       .then(() => {
-        // === UPDATE BUTTON TEXT TO COPIED ===
-        this.buttonTarget.textContent = 'Copied';
-        // === RESET THE BUTTON TEXT AFTER 2 SECONDS ===
+        this.buttonTarget.innerHTML = `<i class="fa fa-check"></i> ${this.confirmValue}`;
         setTimeout(() => {
-          this.buttonTarget.textContent = 'Copy';
-        }, 2000);
+          this.buttonTarget.innerHTML = originalContent;
+        }, this.delayMsValue);
       })
       .catch((error) => {
         console.error('Failed to copy text to clipboard:', error);
