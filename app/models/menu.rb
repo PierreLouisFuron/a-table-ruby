@@ -7,17 +7,18 @@ class Menu < ApplicationRecord
 
   scope :ongoing, -> { where("end_date >= ?", Date.today) }
 
-  def get_menu_ingredients
-    ingredients = []
+  def all_ingredients
+    meals.includes(recipes: :ingredients).flat_map(&:all_ingredients)
+  end
 
-    self.meals.each do |meal|
-      meal.recipes.each do |recipe|
-        recipe.ingredients.each do |ingredient|
-          ingredients << ingredient
-        end
-      end
-    end
-    ingredients
+  def all_ingredients_by_date
+    meals.includes(recipes: :ingredients)
+         .group_by(&:date)
+         .transform_values { |day_meals| day_meals.flat_map(&:all_ingredients) }
+  end
+
+  def all_ingredients_for_date(date)
+    all_ingredients_by_date[date] || []
   end
 
 end
