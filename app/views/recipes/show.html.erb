@@ -42,7 +42,6 @@
           <ul class="dropdown-menu dropdown-menu-end">
             <li><%= link_to edit_recipe_path(@recipe), class: "dropdown-item" do %><i class="fa fa-pencil me-1"></i> Edit<% end %></li>
             <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addToMenuModal"><i class="fa fa-calendar-day me-2"></i> Add to Menu</button></li>
-            <li><%= link_to "#", class: "dropdown-item" do %><i class="fa fa-scroll me-1"></i> Ingredients List<% end %></li>
             <li><hr class="dropdown-divider"></li>
             <li><%= link_to @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'dropdown-item' do %><i class="fa fa-trash me-1"></i> Destroy<% end %></li>
           </ul>
@@ -70,17 +69,19 @@
 </div>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-4" data-controller="clipboard" data-clipboard-confirm-value="">
     <div class="row mb-2">
       <div class="col-12 d-flex">
-        <hr class="flex-grow-1"><h6 class="mx-3">Ingredients</h6><hr class="flex-grow-1">
+        <hr class="flex-grow-1"><h6 class="mx-3">Ingredients<% if @recipe.recipe_ingredients.any? %><button type="button" class="btn btn-outline-primary btn-sm ms-2" data-action="clipboard#copy" data-clipboard-target="button"><i class="fa fa-copy"></i></button><% end %></h6><hr class="flex-grow-1">
       </div>
     </div>
-    <ul class="list-group list-group-flush">
-      <% @recipe.recipe_ingredients.each do |ri| %>
-        <li class="list-group-item"><%= ri.display_ingredient_name %></li>
-      <% end %>
-    </ul>
+    <div data-clipboard-target="content">
+      <ul class="list-group list-group-flush">
+        <% @recipe.recipe_ingredients.each do |ri| %>
+          <li class="list-group-item"><%= ri.display_ingredient_name %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 
   <div class="col-md-8">

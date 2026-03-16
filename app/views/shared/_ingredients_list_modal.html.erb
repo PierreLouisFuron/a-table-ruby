@@ -1,0 +1,17 @@
+<div class="modal fade" id="<%= modal_id %>" data-bs-backdrop="static" tabindex="-1" aria-labelledby="ingredientsListModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" data-controller="clipboard">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5"><%= title %></h1>
+        <%# button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button %>
+      </div>
+      <div class="modal-body text-start" data-clipboard-target="content">
+        <%= render 'shared/ingredients_list', ingredients: ingredients, modal_id: modal_id %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-action="clipboard#copy" data-clipboard-target="button">Copy</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
