@@ -19,6 +19,7 @@
             <ul class="dropdown-menu">
               <li><%= button_to meals_path, params: { menu: menu, meal: { date: date }}, class: 'dropdown-item' do %><i class="fa fa-plus me-2"></i>Add Meal<% end %></li>
               <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#menu<%= menu.id %>Date<%= date %>IngredientsListModal"><i class="fa fa-scroll me-2"></i>Ingredients</button></li>
+              <li><button type="button" class="dropdown-item"><i class="fa fa-broom me-2"></i>Clear <span class="fst-italic fw-light">(Not Working)</span></button></li>
             </ul>
           </span>
         </div>

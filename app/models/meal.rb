@@ -4,13 +4,6 @@ class Meal < ApplicationRecord
   belongs_to :menu
 
   def all_ingredients
-    ingredients = []
-
-    self.recipes.each do |recipe|
-      recipe.ingredients.each do |ingredient|
-        ingredients << ingredient
-      end
-    end
-    ingredients
+    recipes.flat_map(&:ingredients).uniq
   end
 end

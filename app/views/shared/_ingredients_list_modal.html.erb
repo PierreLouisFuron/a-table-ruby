@@ -6,11 +6,7 @@
         <%# button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button %>
       </div>
       <div class="modal-body text-start" data-clipboard-target="content">
-        <ul>
-          <% ingredients.each do |ingredient| %>
-            <li><%= ingredient.name %></li>
-          <% end %>
-        </ul>
+        <%= render 'shared/ingredients_list', ingredients: ingredients, modal_id: modal_id %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-action="clipboard#copy" data-clipboard-target="button">Copy</button>
