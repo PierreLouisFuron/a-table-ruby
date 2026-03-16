@@ -91,15 +91,18 @@ class MenusController < ApplicationController
     menu_modal_id = "menu#{menu.id}IngredientsListModal"
     date_modal_id = "menu#{menu.id}Date#{meal.date}IngredientsListModal"
 
+    ingredients_by_date = menu.all_ingredients_by_date
+    all_ingredients = ingredients_by_date.values.flatten.uniq
+
     render turbo_stream: [
       turbo_stream.replace("tft_meal_#{meal.id}_recipe_#{recipe.id}",
         partial: "menus/recipe_toggle", locals: { meal: meal, recipe: recipe }),
       turbo_stream.replace("#{menu_modal_id}List",
         partial: "shared/ingredients_list",
-        locals: { ingredients: menu.all_ingredients, modal_id: menu_modal_id }),
+        locals: { ingredients: all_ingredients, modal_id: menu_modal_id }),
       turbo_stream.replace("#{date_modal_id}List",
         partial: "shared/ingredients_list",
-        locals: { ingredients: menu.all_ingredients_for_date(meal.date), modal_id: date_modal_id })
+        locals: { ingredients: ingredients_by_date[meal.date] || [], modal_id: date_modal_id })
     ]
   end
 
