@@ -20,21 +20,24 @@ export default class extends Controller {
       }, this.delayMsValue);
     }
 
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(onSuccess).catch((error) => {
-        console.error('Failed to copy text to clipboard:', error);
-      });
-    } else {
-      // fallback method for when the app is used in a non https or localhost environment
+    const fallbackCopy = () => {
       const textarea = document.createElement('textarea')
       textarea.value = text
       textarea.style.position = 'fixed'
       textarea.style.opacity = '0'
-      document.body.appendChild(textarea)
+      this.element.appendChild(textarea)
       textarea.select()
       document.execCommand('copy')
-      document.body.removeChild(textarea)
+      this.element.removeChild(textarea)
       onSuccess()
+    }
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch(() => {
+        fallbackCopy()
+      });
+    } else {
+      fallbackCopy()
     }
   }
 }
