@@ -13,15 +13,27 @@ export default class extends Controller {
   copy() {
     const text = this.contentTarget.innerText
     const originalContent = this.buttonTarget.innerHTML
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        this.buttonTarget.innerHTML = `<i class="fa fa-check"></i> ${this.confirmValue}`;
-        setTimeout(() => {
-          this.buttonTarget.innerHTML = originalContent;
-        }, this.delayMsValue);
-      })
-      .catch((error) => {
+    const onSuccess = () => {
+      this.buttonTarget.innerHTML = `<i class="fa fa-check"></i> ${this.confirmValue}`;
+      setTimeout(() => {
+        this.buttonTarget.innerHTML = originalContent;
+      }, this.delayMsValue);
+    }
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch((error) => {
         console.error('Failed to copy text to clipboard:', error);
       });
+    } else {
+      const textarea = document.createElement('textarea')
+      textarea.value = text
+      textarea.style.position = 'fixed'
+      textarea.style.opacity = '0'
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+      onSuccess()
+    }
   }
 }
