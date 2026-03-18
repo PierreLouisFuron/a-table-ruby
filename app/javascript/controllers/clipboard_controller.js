@@ -25,6 +25,7 @@ export default class extends Controller {
         console.error('Failed to copy text to clipboard:', error);
       });
     } else {
+      // fallback method for when the app is used in a non https or localhost environment
       const textarea = document.createElement('textarea')
       textarea.value = text
       textarea.style.position = 'fixed'

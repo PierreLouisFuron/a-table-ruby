@@ -1,6 +1,6 @@
 class MenusController < ApplicationController
 
-  before_action :set_menu, only: %i[ destroy ]
+  before_action :set_menu, only: %i[ destroy clear_menu_meals clear_day_meals ]
 
   def index
     @menus = Menu.ongoing
@@ -81,6 +81,24 @@ class MenusController < ApplicationController
     respond_to do |format|
       format.html { redirect_to menus_path}
       format.json { head :no_content }
+    end
+  end
+
+  def clear_menu_meals
+    MealsRecipe.where(meal_id: @menu.meal_ids).delete_all
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("menu_#{@menu.id}", partial: "menus/menu", locals: { menu: @menu }) }
+      format.html { redirect_to menus_path }
+    end
+  end
+
+  def clear_day_meals
+    date = params[:date]
+    meals = Meal.where(menu_id: @menu.id, date: date)
+    MealsRecipe.where(meal_id: meals.ids).delete_all
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("menu_#{@menu.id}", partial: "menus/menu", locals: { menu: @menu }) }
+      format.html { redirect_to menus_path }
     end
   end
 

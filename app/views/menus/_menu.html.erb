@@ -1,7 +1,7 @@
-<div class="row mt-2">
+<div id="menu_<%= menu.id %>" class="row mt-2">
   <div class="mt-2">
     <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#menu<%= menu.id %>IngredientsListModal"><i class="fa fa-scroll me-2"></i>Ingredients</button>
-    <button type="button" class="btn btn-primary mb-2"><i class="fa fa-broom me-2"></i>Clear Meals <span class="fst-italic fw-light">(Not Working)</span></button>
+    <%= button_to clear_menu_meals_path(menu), data: {turbo_confirm: 'Clear all meals ?'}, class: 'btn btn-primary mb-2', form_class: 'd-inline' do %> <i class="fa fa-broom me-2"></i>Clear Meals<% end %>
     <%= link_to menu, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-primary mb-2' do %><i class="fa fa-trash me-2"></i>Delete Menu<% end %>
   </div>
   <%= render 'shared/ingredients_list_modal', title: "Menu's Ingredients", ingredients: menu.all_ingredients, modal_id: "menu#{menu.id}IngredientsListModal" %>
@@ -19,7 +19,7 @@
             <ul class="dropdown-menu">
               <li><%= button_to meals_path, params: { menu: menu, meal: { date: date }}, class: 'dropdown-item' do %><i class="fa fa-plus me-2"></i>Add Meal<% end %></li>
               <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#menu<%= menu.id %>Date<%= date %>IngredientsListModal"><i class="fa fa-scroll me-2"></i>Ingredients</button></li>
-              <li><button type="button" class="dropdown-item"><i class="fa fa-broom me-2"></i>Clear <span class="fst-italic fw-light">(Not Working)</span></button></li>
+              <%= button_to clear_day_meals_path(menu), params: {date: date}, data: {turbo_confirm: 'Clear all day meals ?'}, class: 'dropdown-item', form_class: 'd-inline' do %> <i class="fa fa-broom me-2"></i>Clear Meals<% end %>
             </ul>
           </span>
         </div>
