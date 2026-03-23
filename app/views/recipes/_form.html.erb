@@ -82,11 +82,6 @@
     </div>
   </div>
 
-  <% if recipe %>
-    <%= link_to 'Cancel', recipe, class: 'btn btn-primary' %>
-  <% else %>
-    <%= link_to 'Cancel', recipes_path, class: 'btn btn-primary' %>
-  <% end %>
   <%= form.submit nil, class: 'btn btn-primary' %>
-  
+  <%= link_to 'Cancel', recipe || recipes_path, class: 'btn btn-secondary' %>
 <% end %>
