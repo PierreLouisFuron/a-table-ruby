@@ -53,13 +53,13 @@
       <% end %>
       <ul class="list-group list-group-horizontal-sm mb-3">
         <% if @recipe.prep_time? %>
-          <li class="list-group-item">Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
+          <li class="list-group-item"><i class="fa fa-clock me-2"></i>Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
         <% end %>
         <% if @recipe.cooking_time? %>
-          <li class="list-group-item">Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
+          <li class="list-group-item"><i class="fa fa-clock me-2"></i>Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
         <% end %>
         <% if @recipe.servings? %>
-          <li class="list-group-item"> Servings : <strong><%= @recipe.servings %></strong></li>
+          <li class="list-group-item"><i class="fa fa-cutlery me-2"></i>Servings : <strong><%= @recipe.servings %></strong></li>
         <% end %>
       </ul>
     </div>
