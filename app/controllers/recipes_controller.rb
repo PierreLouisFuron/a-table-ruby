@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
 
   def search
     @recipes = if params[:query].present?
-      Recipe.where("name ILIKE ?", "%#{params[:query]}%")
+      Recipe.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query]}%")
     else
       Recipe.all
     end

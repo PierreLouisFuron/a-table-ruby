@@ -25,22 +25,22 @@ class Recipe < ApplicationRecord
 
     def self.search(query, options={include_recipes: true})
         joins_clause = ""
-        where_clauses = options[:include_recipes] ? ["LOWER(recipes.name) LIKE :query"] : []
-        where_values = { query: "%#{query.downcase}%" }
+        where_clauses = options[:include_recipes] ? ["unaccent(recipes.name) ILIKE unaccent(:query)"] : []
+        where_values = { query: "%#{query}%" }
 
         if options[:include_ingredients]
           joins_clause += " LEFT JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipe_id LEFT JOIN ingredients ON recipe_ingredients.ingredient_id = ingredients.id"
-          where_clauses << "LOWER(ingredients.name) LIKE :query"
+          where_clauses << "unaccent(ingredients.name) ILIKE unaccent(:query)"
         end
 
         if options[:include_tags]
           joins_clause += " LEFT JOIN recipe_tags ON recipes.id = recipe_tags.recipe_id LEFT JOIN tags ON recipe_tags.tag_id = tags.id"
-          where_clauses << "LOWER(tags.name) LIKE :query"
+          where_clauses << "unaccent(tags.name) ILIKE unaccent(:query)"
         end
 
         if options[:include_sources]
             joins_clause += " LEFT JOIN recipe_sources ON recipes.id = recipe_sources.recipe_id LEFT JOIN sources ON recipe_sources.source_id = sources.id"
-            where_clauses << "LOWER(sources.name) LIKE :query"
+            where_clauses << "unaccent(sources.name) ILIKE unaccent(:query)"
         end
 
         joins(joins_clause).where(where_clauses.join(' OR '), where_values).distinct
