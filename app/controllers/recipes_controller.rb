@@ -13,9 +13,9 @@ class RecipesController < ApplicationController
 
   def search
     @recipes = if params[:query].present?
-      Recipe.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query]}%")
+      Recipe.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query]}%").order(:id)
     else
-      Recipe.all
+      Recipe.all.order(:id)
     end
     @meal = if params[:meal_id].present?
       Meal.find(params[:meal_id])
@@ -38,9 +38,9 @@ class RecipesController < ApplicationController
         include_tags: params.has_key?(:include_tags),
         include_sources: params.has_key?(:include_sources),
       }
-      @pagy, @recipes = pagy(Recipe.search(params[:search], search_options))
+      @pagy, @recipes = pagy(Recipe.search(params[:search], search_options).order(:id))
     else
-      @pagy, @recipes = pagy(Recipe.all)
+      @pagy, @recipes = pagy(Recipe.all.order(:id))
     end
   end
 
