@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "search_results_#{meal.id}" do %>
-  <ul class="list-group list-group-flush mt-2">
+  <ul class="list-group list-group-flush rounded overflow-hidden mt-2">
     <% if recipes.empty? %>
       <li class="list-group-item">No result</li>
     <% else %>
