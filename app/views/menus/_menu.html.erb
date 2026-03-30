@@ -1,4 +1,4 @@
-<div id="menu_<%= menu.id %>" class="row mt-2">
+<div id="menu_<%= menu.id %>" class="mt-3">
   <div class="mt-2">
     <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#menu<%= menu.id %>IngredientsListModal"><i class="fa fa-scroll me-2"></i>Ingredients</button>
     <%= button_to clear_menu_meals_path(menu), data: {turbo_confirm: 'Clear all meals ?'}, class: 'btn btn-primary mb-2', form_class: 'd-inline' do %> <i class="fa fa-broom me-2"></i>Clear Meals<% end %>
@@ -11,7 +11,7 @@
   <% end %>
   <div class="card-group text-center">
     <% (menu.start_date..menu.end_date).to_a.each do |date| %>
-      <div class="card shadow-sm">
+      <div class="card shadow-sm overflow-hidden">
         <div class="card-header d-flex">
           <div class="flex-grow-1 align-self-center">
             <%= date.strftime("%A, %B %d") %> 
