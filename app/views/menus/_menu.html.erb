@@ -5,10 +5,12 @@
     <%= link_to menu, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-primary mb-2' do %><i class="fa fa-trash me-2"></i>Delete Menu<% end %>
   </div>
   <%= render 'shared/ingredients_list_modal', title: "Menu's Ingredients", ingredients: menu.all_ingredients, modal_id: "menu#{menu.id}IngredientsListModal" %>
+  <% ingredients_by_date = menu.all_ingredients_by_date %>
+  <% (menu.start_date..menu.end_date).to_a.each do |date| %>
+    <%= render 'shared/ingredients_list_modal', title: "#{date.strftime("%A, %B %d")}'s Ingredients", ingredients: ingredients_by_date[date] || [], modal_id: "menu#{menu.id}Date#{date}IngredientsListModal" %>
+  <% end %>
   <div class="card-group text-center">
-    <% ingredients_by_date = menu.all_ingredients_by_date %>
     <% (menu.start_date..menu.end_date).to_a.each do |date| %>
-      <%= render 'shared/ingredients_list_modal', title: "#{date.strftime("%A, %B %d")}'s Ingredients", ingredients: ingredients_by_date[date] || [], modal_id: "menu#{menu.id}Date#{date}IngredientsListModal" %>
       <div class="card shadow-sm">
         <div class="card-header d-flex">
           <div class="flex-grow-1 align-self-center">
@@ -33,3 +35,4 @@
     <% end %>
   </div>
 </div>
+
