@@ -82,6 +82,8 @@
     </div>
   </div>
 
-  <%= form.submit nil, class: 'btn btn-primary' %>
-  <%= link_to 'Cancel', recipe || recipes_path, class: 'btn btn-secondary' %>
+  <div class="d-flex flex-row-reverse">
+    <%= form.submit nil, class: 'btn btn-primary ms-2' %>
+    <%= link_to 'Cancel', recipe || recipes_path, class: 'btn btn-secondary' %>
+  </div>
 <% end %>
