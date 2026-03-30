@@ -12,14 +12,6 @@
   width: 100%;
 }
 
-.responsive-height {
-  max-height: 138px;
-}
-
-.recipe-card {
-  height: 150px;
-}
-
 // ============================================================
 // Component overrides using theme variables
 // ============================================================
@@ -96,6 +88,11 @@
 
 .badge {
   background-color: #00949e !important;
+}
+
+.icon-accent {
+  // color: var(--at-accent);
+  color: #00949e;
 }
 
 .card-footer {
