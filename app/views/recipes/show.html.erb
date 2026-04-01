@@ -1,19 +1,19 @@
-
 <div class="row">
-  <div class="col-md-4 ms-auto mb-3">
-    <div class="recipe-photos">
+  <!-- RECIPE IMAGES -->
+  <div class="col-md-4 mb-3">
+    <div class="rounded shadow-sm overflow-hidden">
       <%= link_to recipe_images_path(@recipe) do %>
-        <% unless @recipe.images.count > 1 %>
-          <%= image_tag @recipe.get_cover_image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
-        <% else %>
-          <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-              <% @recipe.images.each_with_index do |image, index| %>
-                <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <%= image_tag image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner">
+            <% @recipe.get_all_cover_thumbnails.each_with_index do |image, index| %>
+              <div class="carousel-item <%= 'active' if index == 0 %>">
+                <div class="ratio ratio-4x3">
+                  <%= image_tag image, class: 'img-fluid object-fit-cover', alt: 'menu' %>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
+          </div>
+          <% if @recipe.images.count > 1 %>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
@@ -22,61 +22,80 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
 
-  <div class="col-md-8 mb-3 d-flex justify-content-between flex-column">
-    <div>
-      <div class="d-flex justify-content-between">
-        <h2 class="text-capitalize">
-          <%= @recipe.name %>
-        </h2>
-        
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Actions
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><%= link_to edit_recipe_path(@recipe), class: "dropdown-item" do %><i class="fa fa-pencil me-1"></i> Edit<% end %></li>
-            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addToMenuModal"><i class="fa fa-calendar-day me-2"></i> Add to Menu</button></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><%= link_to @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'dropdown-item' do %><i class="fa fa-trash me-1"></i> Destroy<% end %></li>
-          </ul>
+  <!-- TITLE / TAGS / TIMES / SOURCES -->
+  <div class="col-md-8 mb-3">
+    <!-- RECIPE TITLE AND ACTION BUTTON -->
+    <div class="d-flex justify-content-between">
+      <h2 class="text-capitalize">
+        <%= @recipe.name %>
+      </h2>
+
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Actions
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><%= link_to edit_recipe_path(@recipe), class: "dropdown-item" do %><i class="fa fa-pencil me-1"></i> Edit<% end %></li>
+          <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addToMenuModal"><i class="fa fa-calendar-day me-2"></i> Add to Menu</button></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><%= link_to @recipe, data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' }, class: 'dropdown-item' do %><i class="fa fa-trash me-1"></i> Destroy<% end %></li>
+        </ul>
+      </div>
+    </div>
+    <%= render 'add_recipe_to_meals_modal', recipe: @recipe, menus: Menu.where("end_date >= ?", Date.today) %>
+
+    <!-- TAGS -->
+    <% @recipe.tags.each do |tag| %>
+      <span class="badge rounded-pill text-bg-primary mb-2"><%= tag.name %></span>
+    <% end %>
+
+    <!-- PREP TIME / COOKING TIME / SERVINGS -->
+    <ul class="list-group list-group-horizontal-sm mb-3">
+      <% if @recipe.prep_time? %>
+        <li class="list-group-item shadow-sm"><i class="fa fa-mortar-pestle me-2 icon-accent"></i>Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
+      <% end %>
+      <% if @recipe.cooking_time? %>
+        <li class="list-group-item shadow-sm"><i class="fa fa-fire-burner me-2 icon-accent"></i>Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
+      <% end %>
+      <% if @recipe.servings? %>
+        <li class="list-group-item shadow-sm"><i class="fa fa-cutlery me-2 icon-accent"></i>Servings : <strong><%= @recipe.servings %></strong></li>
+      <% end %>
+    </ul>
+
+    <!-- SOURCES -->
+    <% if @recipe.sources.any? %>
+      <div class="border rounded-3 p-3 shadow-sm">
+        <h5 class="mb-3 d-flex justify-content-between align-items-center"><span><i class="fa fa-mitten icon-accent me-2"></i>Sources</span></h5>
+        <div class="d-flex flex-wrap">
+          <% @recipe.recipe_sources.each_with_index do |rs, index| %>
+            <div class="me-3">
+              <i class="fa fa-<%= rs.source.fa_icon%>"></i>
+              <% if rs.source.website? %>
+                <%= link_to rs.source.name, rs.details %>
+              <% else %>
+                <%= rs.source.name %>
+                <% unless rs.details.nil? %> - <%= rs.details %><% end %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
-      <%= render 'add_recipe_to_meals_modal', recipe: @recipe, menus: Menu.where("end_date >= ?", Date.today) %>
-      <% @recipe.tags.each do |tag| %>
-        <span class="badge rounded-pill text-bg-primary mb-2"><%= tag.name %></span>
-      <% end %>
-      <ul class="list-group list-group-horizontal-sm mb-3">
-        <% if @recipe.prep_time? %>
-          <li class="list-group-item"><i class="fa fa-mortar-pestle me-2"></i>Preparation Time : <strong><%= ChronicDuration.output(@recipe.prep_time * 60, :format => :long) %></strong></li>
-        <% end %>
-        <% if @recipe.cooking_time? %>
-          <li class="list-group-item"><i class="fa fa-fire-burner me-2"></i>Cooking Time : <strong><%= ChronicDuration.output(@recipe.cooking_time * 60, :format => :long) %></strong></li>
-        <% end %>
-        <% if @recipe.servings? %>
-          <li class="list-group-item"><i class="fa fa-cutlery me-2"></i>Servings : <strong><%= @recipe.servings %></strong></li>
-        <% end %>
-      </ul>
-    </div>
-
-    <%= render 'sources', recipe: @recipe %>  
+    <% end %>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-4" data-controller="clipboard" data-clipboard-confirm-value="">
-    <div class="row mb-2">
-      <div class="col-12 d-flex">
-        <hr class="flex-grow-1"><h6 class="mx-3">Ingredients<% if @recipe.recipe_ingredients.any? %><button type="button" class="btn btn-outline-primary btn-sm ms-2" data-action="clipboard#copy" data-clipboard-target="button"><i class="fa fa-copy"></i></button><% end %></h6><hr class="flex-grow-1">
-      </div>
-    </div>
-    <div data-clipboard-target="content">
-      <ul class="list-group list-group-flush">
+  <!-- INGREDIENTS LIST -->
+  <div class="col-md-4 mb-3" data-controller="clipboard" data-clipboard-confirm-value="">
+    <div class="border rounded-3 shadow-sm">
+      <h5 class="mx-3 mt-3 mb-2 d-flex justify-content-between align-items-center"><span><i class="fa fa-carrot icon-accent me-2"></i>Ingredients</span><% if @recipe.recipe_ingredients.any? %><button type="button" class="btn btn-outline-primary btn-sm" data-action="clipboard#copy" data-clipboard-target="button"><i class="fa fa-copy"></i></button><% end %></h5>
+      <ul class="list-group list-group-flush mb-2" data-clipboard-target="content">
         <% @recipe.recipe_ingredients.each do |ri| %>
           <li class="list-group-item"><%= ri.display_ingredient_name %></li>
         <% end %>
@@ -84,15 +103,13 @@
     </div>
   </div>
 
+  <!-- INSTRUCTIONS -->
   <div class="col-md-8">
-    <div class="row mb-2">
-      <div class="col-12 d-flex">
-        <hr class="flex-grow-1"><h6 class="mx-3">Instructions</h6><hr class="flex-grow-1">
+    <div class="border rounded-3 p-3 mb-2 shadow-sm">
+      <h5 class="mb-3 d-flex justify-content-between align-items-center"><span><i class="fa fa-list-ul icon-accent me-2"></i>Instructions</span></h5>
+      <div class="px-4"style="text-align: justify;">
+        <%= simple_format(@recipe.description) %>
       </div>
-    </div>
-
-    <div style="text-align: justify;">
-      <%= simple_format(@recipe.description) %>
     </div>
   </div>
 </div>

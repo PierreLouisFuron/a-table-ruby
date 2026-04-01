@@ -86,6 +86,14 @@ class Recipe < ApplicationRecord
         end
     end
 
+    def get_all_cover_thumbnails
+        if self.images.empty?
+            ['placeholders/placeholder.png']
+        else
+            self.images.map { |image| image.variant(resize_to_limit: [500, 500]).processed }
+        end
+    end
+
     def find_or_create_ingredients
         self.recipe_ingredients.each do |recipe_ingredient|
             recipe_ingredient.ingredient = Ingredient.find_or_create_by(name:recipe_ingredient.ingredient.name)

@@ -12,12 +12,34 @@
   width: 100%;
 }
 
-.responsive-height {
-  max-height: 138px;
+.card-img-wrapper {
+  flex-shrink: 0;
+  width: 35%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--bs-card-border-radius) 0 0 var(--bs-card-border-radius);
+  }
 }
 
-.recipe-card {
-  height: 150px;
+@media (max-width: 767.98px) {
+  .card.flex-row {
+    min-height: 130px;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-img-wrapper {
+    width: 100%;
+
+    img {
+      aspect-ratio: 16 / 9;
+      height: auto;
+      border-radius: var(--bs-card-border-radius) var(--bs-card-border-radius) 0 0;
+    }
+  }
 }
 
 // ============================================================
@@ -96,6 +118,11 @@
 
 .badge {
   background-color: #00949e !important;
+}
+
+.icon-accent {
+  // color: var(--at-accent);
+  color: #00949e;
 }
 
 .card-footer {
