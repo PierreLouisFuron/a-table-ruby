@@ -1,7 +1,7 @@
-<div class="col-md-3 col-6 mb-3">
-  <%= link_to recipe, class: "card shadow-sm h-100 text-decoration-none" do %>
-    <div class="ratio ratio-16x9">
-      <%= image_tag recipe.get_cover_thumbnail, class: 'card-img-top object-fit-cover', alt: 'menu' %>
+<div class="col-md-3 mb-3">
+  <%= link_to recipe, class: "card shadow-sm h-100 text-decoration-none flex-row flex-md-column" do %>
+    <div class="card-img-wrapper">
+      <%= image_tag recipe.get_cover_thumbnail, class: '', alt: 'menu' %>
     </div>
     <div class="card-body">
       <h5 class="card-title text-capitalize"><%= recipe.name %></h5>
