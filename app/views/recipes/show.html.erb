@@ -1,19 +1,19 @@
 <div class="row">
   <!-- RECIPE IMAGES -->
   <div class="col-md-4 mb-3">
-    <div class="recipe-photos">
+    <div class="rounded shadow-sm overflow-hidden">
       <%= link_to recipe_images_path(@recipe) do %>
-        <% unless @recipe.images.count > 1 %>
-          <%= image_tag @recipe.get_cover_image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
-        <% else %>
-          <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-              <% @recipe.images.each_with_index do |image, index| %>
-                <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <%= image_tag image, class: 'img-fluid rounded shadow-sm', alt: 'menu' %>
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner">
+            <% @recipe.get_all_cover_thumbnails.each_with_index do |image, index| %>
+              <div class="carousel-item <%= 'active' if index == 0 %>">
+                <div class="ratio ratio-4x3">
+                  <%= image_tag image, class: 'img-fluid object-fit-cover', alt: 'menu' %>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
+          </div>
+          <% if @recipe.images.count > 1 %>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
@@ -22,8 +22,8 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
