@@ -14,14 +14,14 @@
           <% end %>
           <div class="carousel-inner" style="height: inherit;">
             <% meal.recipes.each_with_index do |recipe, index| %>
-              <%# link_to recipe do %>
+              <%= link_to recipe, data: { turbo_frame: "_top" }, style: 'height: inherit;' do %>
                 <div class="carousel-item <%= 'active' if index == 0 %>" style="height: inherit;">
                   <%= image_tag recipe.get_cover_image, class: 'menu-meal-carrousel img-fluid', alt: 'menu', style: 'height: inherit;'%>
                   <div class="carousel-caption">
                     <%= recipe.name %>
                   </div>
                 </div>
-              <%# end %>
+              <% end %>
             <% end %>
           </div>
           <% if meal.recipes.count > 1 %>
