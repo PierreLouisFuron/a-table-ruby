@@ -92,12 +92,31 @@
 
 <div class="row">
   <!-- INGREDIENTS LIST -->
-  <div class="col-md-4 mb-3" data-controller="clipboard" data-clipboard-confirm-value="">
+  <div class="col-md-4 mb-3" data-controller="clipboard servings" data-clipboard-confirm-value="" data-servings-base-value="<%= @recipe.servings || 1 %>" data-servings-current-value="<%= @recipe.servings || 1 %>">
     <div class="border rounded-3 shadow-sm">
-      <h5 class="mx-3 mt-3 mb-2 d-flex justify-content-between align-items-center"><span><i class="fa fa-carrot icon-accent me-2"></i>Ingredients</span><% if @recipe.recipe_ingredients.any? %><button type="button" class="btn btn-outline-primary btn-sm" data-action="clipboard#copy" data-clipboard-target="button"><i class="fa fa-copy"></i></button><% end %></h5>
+      <h5 class="mx-3 mt-3 mb-2 d-flex justify-content-between align-items-center">
+        <span><i class="fa fa-carrot icon-accent me-2"></i>Ingredients</span>
+        <% if @recipe.recipe_ingredients.any? %>
+          <div>
+            <% if @recipe.servings? %>
+              <div class="btn-group btn-group-sm" role="group" aria-label="Adjust servings">
+                <button type="button" class="btn btn-outline-primary" data-action="servings#decrement"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-outline-primary" style="width: 2rem;" data-servings-target="count" data-action="servings#reset"><%= @recipe.servings %></button>
+                <button type="button" class="btn btn-outline-primary" data-action="servings#increment"><i class="fa fa-plus"></i></button>
+              </div>
+            <% end %>
+            <button type="button" class="btn btn-outline-primary btn-sm" data-action="clipboard#copy" data-clipboard-target="button"><i class="fa fa-copy"></i></button>
+          </div>
+        <% end %>
+      </h5>
       <ul class="list-group list-group-flush mb-2" data-clipboard-target="content">
         <% @recipe.recipe_ingredients.each do |ri| %>
-          <li class="list-group-item"><%= ri.display_ingredient_name %></li>
+          <li class="list-group-item"
+              data-servings-target="ingredient"
+              data-quantity="<%= ri.quantity %>"
+              data-unit="<%= ri.unit %>"
+              data-name="<%= ri.ingredient.name.capitalize %>"
+              data-optional="<%= ri.is_optional %>"></li>
         <% end %>
       </ul>
     </div>
