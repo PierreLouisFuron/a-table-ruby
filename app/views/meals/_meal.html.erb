@@ -16,7 +16,9 @@
             <% meal.recipes.each_with_index do |recipe, index| %>
               <%= link_to recipe, data: { turbo_frame: "_top" }, style: 'height: inherit;' do %>
                 <div class="carousel-item <%= 'active' if index == 0 %>" style="height: inherit;">
-                  <%= image_tag recipe.get_cover_image, class: 'menu-meal-carrousel img-fluid', alt: 'menu', style: 'height: inherit;'%>
+                  <div class="lazy-image" style="height: inherit;" data-controller="lazy-image">
+                    <%= image_tag recipe.get_cover_image, class: 'menu-meal-carrousel img-fluid', alt: 'menu', style: 'height: inherit;', loading: 'lazy', data: { lazy_image_target: 'img', action: 'load->lazy-image#reveal' } %>
+                  </div>
                   <div class="carousel-caption">
                     <%= recipe.name %>
                   </div>

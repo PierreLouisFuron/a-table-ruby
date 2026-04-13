@@ -3,12 +3,12 @@
   <div class="col-md-4 mb-3">
     <div class="rounded shadow-sm overflow-hidden">
       <%= link_to recipe_images_path(@recipe) do %>
-        <div id="carouselExample" class="carousel slide">
+        <div id="carouselExample" class="carousel slide" data-controller="lazy-image">
           <div class="carousel-inner">
             <% @recipe.get_all_cover_thumbnails.each_with_index do |image, index| %>
               <div class="carousel-item <%= 'active' if index == 0 %>">
-                <div class="ratio ratio-4x3">
-                  <%= image_tag image, class: 'img-fluid object-fit-cover', alt: 'menu' %>
+                <div class="ratio ratio-4x3 lazy-image">
+                  <%= image_tag image, class: 'img-fluid object-fit-cover', alt: 'menu', loading: 'lazy', data: { lazy_image_target: 'img', action: 'load->lazy-image#reveal' } %>
                 </div>
               </div>
             <% end %>

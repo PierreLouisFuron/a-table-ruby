@@ -1,8 +1,8 @@
 <li class="list-group-item p-0" > 
   <div class="d-flex justify-content-between align-items-center">
     <div class="d-flex justify-content-start align-items-center">
-      <div class="ratio ratio-4x3 flex-shrink-0 me-3" style="width: 70px;">
-        <%= image_tag recipe.get_tiny_cover_thumbnail, class: 'object-fit-cover', alt: 'menu' %>
+      <div class="ratio ratio-4x3 flex-shrink-0 me-3 lazy-image" style="width: 70px;" data-controller="lazy-image">
+        <%= image_tag recipe.get_tiny_cover_thumbnail, class: 'object-fit-cover', alt: 'menu', loading: 'lazy', data: { lazy_image_target: 'img', action: 'load->lazy-image#reveal' } %>
       </div>
       <%= recipe.name %>
     </div>

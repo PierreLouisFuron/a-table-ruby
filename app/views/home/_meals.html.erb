@@ -10,7 +10,7 @@
         <% meal.recipes.each do |recipe| %>
           <%= link_to recipe, class: "card shadow-sm text-decoration-none" do %>
             <!--div class="card-title"> test </div-->
-            <%= image_tag recipe.get_square_thumbnail, class: 'card-img-top bg-danger', alt: 'menu' %>
+            <%= lazy_image_tag recipe.get_square_thumbnail, class: 'card-img-top', alt: 'menu' %>
             <div class="card-body">
                 <p class="card-text"><%= recipe.name %></p>
             </div>

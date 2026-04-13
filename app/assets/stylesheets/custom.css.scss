@@ -4,6 +4,50 @@
 @import url("https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.min.css");
 
 // ============================================================
+// Lazy-loaded image placeholder + fade-in
+// ============================================================
+.lazy-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--bs-secondary-bg, #e9ecef);
+
+  // Shimmer animation (uses ::after to avoid conflicts with Bootstrap .ratio::before)
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    );
+    animation: lazy-shimmer 1.4s ease-in-out infinite;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  &.lazy-image--ready::after {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.lazy-image--loaded {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes lazy-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+// ============================================================
 // Layout utility classes
 // ============================================================
 .menu-meal-carrousel {
