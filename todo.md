@@ -1,5 +1,4 @@
 TODO : 
-- add recipe to menus from the recipe show page
 - add another button to quickly remove recipes from meals, on the menu index page
 - update dynamically source.details field when changing the type of a source, when updating a recipe
 - Update the show all recipe pictures, not just the first one
@@ -14,6 +13,7 @@ TODO :
 - Improve the UI to handle menus and meals
 
 DONE: 
+- add recipe to menus from the recipe show page
 - add small recipe image to list of recipes when adding a recipe to meals, from the menu page
 - improve how dates are displayed on the menu page
 - possibility to create menus with meals with recipes
