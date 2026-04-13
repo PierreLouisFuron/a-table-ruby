@@ -136,6 +136,16 @@
   color: var(--at-accent-text);
 }
 
+.btn-outline-primary:focus {
+  border-color: var(--at-accent-hover);
+  color: var(--bs-body-color);
+}
+
+.btn-outline-primary:active {
+  border-color: var(--at-accent-hover);
+  color: var(--at-accent-text);
+}
+
 .btn-outline-primary:hover {
   border-color: var(--at-accent-hover);
   color: var(--at-accent-text);
@@ -153,11 +163,6 @@
   background-color: var(--at-accent-hover);
   border-color: var(--at-accent-hover);
   color: var(--at-accent-text);
-}
-
-.btn-outline-primary:focus {
-  border-color: var(--at-accent-hover);
-  color: var(--bs-body-color);
 }
 
 .badge {
