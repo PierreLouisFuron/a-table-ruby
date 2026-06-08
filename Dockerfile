@@ -27,7 +27,7 @@ RUN gem install bundler && bundle install
 COPY . /app/
 
 # Precompile assets (if needed)
-RUN bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 # RUN bundle exec rails db:migrate
 
 # Expose port 3000 to the Docker host
