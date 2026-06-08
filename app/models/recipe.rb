@@ -14,6 +14,8 @@ class Recipe < ApplicationRecord
     has_many :sources, :through => :recipe_sources
     accepts_nested_attributes_for :recipe_sources, allow_destroy: true
 
+    before_validation :strip_whitespace
+
     validates_presence_of :name
     validates_uniqueness_of :name
 
@@ -129,6 +131,12 @@ class Recipe < ApplicationRecord
 
     def cooking_time_minutes
         cooking_time % 60 != 0 ? cooking_time % 60 : nil
+    end
+
+    private
+
+    def strip_whitespace
+      self.name = name.strip
     end
 
 end

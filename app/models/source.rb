@@ -3,6 +3,8 @@ class Source < ApplicationRecord
   has_many :recipe_sources
   has_many :recipes, :through => :recipe_sources
 
+  before_validation :strip_whitespace
+
   validates_presence_of :name
   validates_presence_of :source_type
 
@@ -23,6 +25,12 @@ class Source < ApplicationRecord
       course: 'school'
     }
     fa_mapping[self.source_type.to_sym]
+  end
+
+  private
+
+  def strip_whitespace
+    self.name = name.strip
   end
 
 end
