@@ -3,31 +3,6 @@ class RecipesController < ApplicationController
   include Pagy::Backend
   before_action :set_recipe, only: %i[ show edit update destroy ]
 
-  def destroy_image
-    @recipe = Recipe.find(params[:recipe_id])
-    @image = @recipe.images.find(params[:id])
-    @image.purge
-
-    redirect_to recipe_images_path(@recipe), notice: 'Image was successfully deleted.'
-  end
-
-  def search
-    @recipes = if params[:query].present?
-      Recipe.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query].strip}%").order(:id)
-    else
-      Recipe.all.order(:id)
-    end
-    @meal = if params[:meal_id].present?
-      Meal.find(params[:meal_id])
-    else
-      nil
-    end
-    respond_to do |format|
-      # format.turbo_stream { render partial: "home/recipes", locals: { recipes: @recipes } }
-      format.html { render partial: "menus/recipes", locals: { recipes: @recipes, meal: @meal } }
-    end
-  end
-
   # GET /recipes or /recipes.json
   def index
     if params[:search]
@@ -97,6 +72,32 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: "Recipe was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def destroy_image
+    @recipe = Recipe.find(params[:recipe_id])
+    @image = @recipe.images.find(params[:id])
+    @image.purge
+
+    redirect_to recipe_images_path(@recipe), notice: 'Image was successfully deleted.'
+  end
+
+  # TODO: move that logic to a model
+  def search
+    @recipes = if params[:query].present?
+      Recipe.where("unaccent(name) ILIKE unaccent(?)", "%#{params[:query].strip}%").order(:id)
+    else
+      Recipe.all.order(:id)
+    end
+    @meal = if params[:meal_id].present?
+      Meal.find(params[:meal_id])
+    else
+      nil
+    end
+    respond_to do |format|
+      # format.turbo_stream { render partial: "home/recipes", locals: { recipes: @recipes } }
+      format.html { render partial: "menus/recipes", locals: { recipes: @recipes, meal: @meal } }
     end
   end
 
