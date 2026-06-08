@@ -24,6 +24,7 @@ class Recipe < ApplicationRecord
     before_save :find_or_create_sources
 
     def self.search(query, options={include_recipes: true})
+        query = query.strip
         joins_clause = ""
         where_clauses = options[:include_recipes] ? ["unaccent(recipes.name) ILIKE unaccent(:query)"] : []
         where_values = { query: "%#{query}%" }
