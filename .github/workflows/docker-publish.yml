@@ -1,0 +1,29 @@
+name: Build and Push Docker Image
+
+# 1. Trigger the workflow whenever you push to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 2. Checkout your repository code onto the GitHub runner
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    # 3. Log into Docker Hub using secrets (configured in Step 3)
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    # 4. Run your Docker commands!
+    - name: Build, Tag, and Push Docker Image
+      run: |
+        docker build -t a-table:3 .
+        docker tag a-table:3 ${{ secrets.DOCKERHUB_USERNAME }}/a-table
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/a-table
