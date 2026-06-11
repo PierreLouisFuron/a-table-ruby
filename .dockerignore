@@ -1,0 +1,20 @@
+# Secrets — never ship these in the image
+config/master.key
+config/credentials/*.key
+
+# Version control & CI
+.git
+.gitignore
+.github
+
+# Test suite (not needed at runtime)
+spec
+
+# Local env files
+.env
+.env.*
+
+# Docs
+README.md
+CLAUDE.md
+todo.md
