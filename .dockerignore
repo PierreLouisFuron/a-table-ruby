@@ -10,6 +10,12 @@ config/credentials/*.key
 # Test suite (not needed at runtime)
 spec
 
+# Generated/runtime dirs — bust cache and bloat the image
+tmp
+log
+storage
+node_modules
+
 # Local env files
 .env
 .env.*

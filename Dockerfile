@@ -21,7 +21,9 @@ WORKDIR /app
 
 # Install gems
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install
+RUN gem install bundler \
+ && bundle config set --local without 'development test' \
+ && bundle install --jobs 4
 
 # Copy the Rails application into the container
 COPY . /app/
