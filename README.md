@@ -33,25 +33,22 @@ Things you may want to cover:
 
 # Deploy A Taaable
 
-## Configuration: SECRET_KEY_BASE (required, one-time)
+## a-table.env file
 
-A Table is a Rails app, so it needs a `SECRET_KEY_BASE` to run in production (it
-signs/encrypts sessions, cookies, CSRF tokens, etc.). The Docker image does
-**not** contain one — each deployment supplies its own. Without it the container
-will fail to start.
+Create a file that can be called `a-table.env` on your server and add the following fields 
+```.env
+# Rails
+SECRET_KEY_BASE=<openssl rand -hex 64>
 
-Generate one **once** and store it in an env file on the server (this keeps it
-stable across restarts and out of your shell history):
-
-```bash
-echo "SECRET_KEY_BASE=$(openssl rand -hex 64)" > ~/a-table.env
-chmod 600 ~/a-table.env
+# Database
+POSTGRES_USER=a_table
+POSTGRES_PASSWORD=<your-own-strong-password>
 ```
 
-> ⚠️ Keep this value stable. Generating a new one later invalidates all existing
-> sessions and makes any previously encrypted data undecryptable. Back it up.
-
-Every `docker run` of the app below passes this file with `--env-file ~/a-table.env`.
+then run 
+```bash
+chmod 600 ~/a-table.env
+```
 
 ## First Ever Deploy on Raspberry Pi server
 
@@ -60,8 +57,7 @@ Every `docker run` of the app below passes this file with `--env-file ~/a-table.
 3. Create network to allow the app and db containers to communicate (if not present already) <br>`docker network create a_table_network`
 4. Create volume to store the images (if not present already) <br>`docker volume create a_table_images`
 5. Pull and run official postgres container (if not present already) <br>
-`docker run -p 5432:5432 --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
-`docker run --network a_table_network --name a-table-postgres -e POSTGRES_PASSWORD=atablepassword -d postgres`
+`docker run -d --network a_table_network --name a-table-postgres --env-file ~/a-table.env -v a_table_pgdata:/var/lib/postgresql/data postgres`
 6. Remove old app container (if already present) <br>`docker stop a-table && docker rm a-table`
 7. Mount, start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table --env-file ~/a-table.env -v a_table_images:/app/public/images cybberbobby/a-table`
 
@@ -87,3 +83,19 @@ After the container is up and running
 - `docker start CONTAINERT_NAME` start container
 - `docker stop CONTAINER_NAME` stop container
 - `docker image prune` delete all dangling images
+
+## What is SECRET_KEY_BASE ? 
+
+A Table is a Rails app, so it needs a `SECRET_KEY_BASE` to run in production (it
+signs/encrypts sessions, cookies, CSRF tokens, etc.). The Docker image does
+**not** contain one — each deployment supplies its own. Without it the container
+will fail to start.
+
+Generate one **once** and store it in an env file on the server (this keeps it
+stable across restarts and out of your shell history)
+
+
+> ⚠️ Keep this value stable. Generating a new one later invalidates all existing
+> sessions and makes any previously encrypted data undecryptable. Back it up.
+
+Every `docker run` of the app passes this file with `--env-file ~/a-table.env`.
