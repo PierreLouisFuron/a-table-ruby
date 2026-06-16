@@ -1,27 +1,55 @@
+# A-Table — production deployment.
+#
+# 1. Create an env file (see `.env.example`) containing:
+#      SECRET_KEY_BASE=<openssl rand -hex 64>
+#      POSTGRES_USER=a_table
+#      POSTGRES_PASSWORD=<a-strong-password>
+# 2. Start it:
+#      - locally, with a `.env` next to this file:   docker compose up -d
+#      - on a server with ~/a-table.env:             ATABLE_ENV_FILE=$HOME/a-table.env docker compose up -d
+#
+# The app container creates and migrates the database on startup, so no
+# manual `rails db:create`/`db:migrate` is needed.
 
-# DOCKER COMPOSE NOT YET WORKING
-
-version: '3.7'
 services:
-  db:
-    image: 'postgres'
-    ports:
-      - '5432:5432'
+  # Service name must match `host:` in config/database.yml (production).
+  a-table-postgres:
+    image: postgres:16
+    restart: unless-stopped
+    env_file:
+      - ${ATABLE_ENV_FILE:-.env}
     volumes:
-      - postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: atablepassword
-    # env_file:
-    #   - ./env/postgres.env # you can also define env variables like this.
+      - a_table_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   rails:
-    # build: ./ 
-    image: a-table:3
+    image: cybberbobby/a-table:latest
+    # To build locally instead of pulling from Docker Hub, comment out the
+    # `image:` line above and uncomment the line below.
+    # build: .
+    restart: unless-stopped
+    env_file:
+      - ${ATABLE_ENV_FILE:-.env}
+    environment:
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
     ports:
       - '3000:3000'
     volumes:
-      - .:/docker/app # add our local code to dockerfile
+      # Persist Active Storage uploads (production stores files in public/images).
+      - a_table_images:/app/public/images
     depends_on:
-      - db  # add all dependant container
+      a-table-postgres:
+        condition: service_healthy
+    command: >
+      bash -c "bundle exec rails db:prepare &&
+               bundle exec rails server -b 0.0.0.0"
 
 volumes:
-  postgres: # named volume
+  a_table_pgdata:
+  a_table_images:
