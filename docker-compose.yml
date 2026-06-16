@@ -1,12 +1,10 @@
 # A-Table — production deployment.
 #
-# 1. Create an env file (see `.env.example`) containing:
+# 1. Create a `.env` file next to this file (see `.env.example`) containing:
 #      SECRET_KEY_BASE=<openssl rand -hex 64>
 #      POSTGRES_USER=a_table
 #      POSTGRES_PASSWORD=<a-strong-password>
-# 2. Start it:
-#      - locally, with a `.env` next to this file:   docker compose up -d
-#      - on a server with ~/a-table.env:             ATABLE_ENV_FILE=$HOME/a-table.env docker compose up -d
+# 2. docker compose up -d
 #
 # The app container creates and migrates the database on startup, so no
 # manual `rails db:create`/`db:migrate` is needed.
@@ -17,7 +15,7 @@ services:
     image: postgres:16
     restart: unless-stopped
     env_file:
-      - ${ATABLE_ENV_FILE:-.env}
+      - .env
     volumes:
       - a_table_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -33,7 +31,7 @@ services:
     # build: .
     restart: unless-stopped
     env_file:
-      - ${ATABLE_ENV_FILE:-.env}
+      - .env
     environment:
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: "true"

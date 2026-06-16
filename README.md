@@ -33,9 +33,9 @@ Things you may want to cover:
 
 # Deploy A Taaable
 
-## a-table.env file
+## .env file
 
-Create a file that can be called `a-table.env` on your server and add the following fields 
+Create a `.env` file next to the `docker-compose.yml` on your server and add the following fields 
 ```.env
 # Rails
 SECRET_KEY_BASE=<openssl rand -hex 64>
@@ -47,7 +47,7 @@ POSTGRES_PASSWORD=<your-own-strong-password>
 
 then run 
 ```bash
-chmod 600 ~/a-table.env
+chmod 600 .env
 ```
 
 ## First Ever Deploy on Raspberry Pi server
@@ -57,9 +57,9 @@ chmod 600 ~/a-table.env
 3. Create network to allow the app and db containers to communicate (if not present already) <br>`docker network create a_table_network`
 4. Create volume to store the images (if not present already) <br>`docker volume create a_table_images`
 5. Pull and run official postgres container (if not present already) <br>
-`docker run -d --network a_table_network --name a-table-postgres --env-file ~/a-table.env -v a_table_pgdata:/var/lib/postgresql/data postgres`
+`docker run -d --network a_table_network --name a-table-postgres --env-file .env -v a_table_pgdata:/var/lib/postgresql/data postgres`
 6. Remove old app container (if already present) <br>`docker stop a-table && docker rm a-table`
-7. Mount, start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table --env-file ~/a-table.env -v a_table_images:/app/public/images cybberbobby/a-table`
+7. Mount, start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table --env-file .env -v a_table_images:/app/public/images cybberbobby/a-table`
 
 ## Setup DB for the first time
 
@@ -73,7 +73,7 @@ After the container is up and running
 1. ssh server
 2. Remove old app container <br>`docker stop a-table && docker rm a-table`
 3. Pull latest docker image from docker hub <br>`docker pull cybberbobby/a-table(:latest)`
-4. Mount, start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table --env-file ~/a-table.env -v a_table_images:/app/public/images cybberbobby/a-table`
+4. Mount, start container and make it available on port 3000 <br>`docker run -d -p 3000:3000 --network a_table_network --name a-table --env-file .env -v a_table_images:/app/public/images cybberbobby/a-table`
 
 ## Useful commands
 
@@ -98,4 +98,4 @@ stable across restarts and out of your shell history)
 > ⚠️ Keep this value stable. Generating a new one later invalidates all existing
 > sessions and makes any previously encrypted data undecryptable. Back it up.
 
-Every `docker run` of the app passes this file with `--env-file ~/a-table.env`.
+Every `docker run` of the app passes this file with `--env-file .env`.
