@@ -1,4 +1,4 @@
-<% if Recipe.joins(:meals).where('meals.date = ?', date).count == 0 %>
+<% if meals.count == 0 %>
   <div class="col-12">
     <h4>Nothing at the moment 😢 </h4>
   </div>

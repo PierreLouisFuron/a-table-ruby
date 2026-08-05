@@ -1,25 +1,39 @@
 <div class="row">
-  <h1>On Today's Menu </h1>
-  <%= render 'meals', meals: @meals_of_the_day, date: DateTime.now %>
 
-  <h1>And Tomorrow </h1>
-  <%= render 'meals', meals: @meals_of_tomorrow, date: DateTime.tomorrow %>
-
-
-  <div class="col-12">
-    <h1> Other Upcoming Deliciously Tasty Recipes </h1>
-    <% if @recipes_of_the_future.count == 0 %>
-    <h4>Nothing at the moment 😢 </h4>
-    <% else %>
-      <div class="list-group">
-        <% @recipes_of_the_future.each do |recipe| %>
-          <%= link_to recipe, class: "list-group-item" do %>
-            <%= recipe.name %>
+  <% if @upcoming_meals.empty? %>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">No upcoming meals</h5>
+          <%= link_to menus_path, class: 'btn btn-primary' do %>
+            Go to menus <i class="fa fa-arrow-right ms-2"></i>
           <% end %>
-          <%# image_tag recipe.get_square_thumbnail, class: 'card-img-top bg-danger', alt: 'menu' %>
-        <% end %>
+        </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <h1>On Today's Menu </h1>
+    <%= render 'meals', meals: @meals_of_the_day, date: Date.today %>
+
+    <h1>And Tomorrow </h1>
+    <%= render 'meals', meals: @meals_of_tomorrow, date: Date.tomorrow %>
+
+
+    <div class="col-12">
+      <h1> Other Upcoming Deliciously Tasty Recipes </h1>
+      <% if @recipes_of_the_future.count == 0 %>
+      <h4>Nothing at the moment 😢 </h4>
+      <% else %>
+        <div class="list-group">
+          <% @recipes_of_the_future.each do |recipe| %>
+            <%= link_to recipe, class: "list-group-item" do %>
+              <%= recipe.name %>
+            <% end %>
+            <%# image_tag recipe.get_square_thumbnail, class: 'card-img-top bg-danger', alt: 'menu' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
 </div>
