@@ -42,6 +42,32 @@
   }
 }
 
+// Bootstrap's .card-group corner overrides use direct-child selectors
+// (`> .card-img-top`), which don't reach images wrapped by lazy_image_tag.
+// Carry the radius on the wrapper and square the joined edges ourselves.
+.card-group > .card > .lazy-image {
+  border-top-left-radius: var(--bs-card-inner-border-radius);
+  border-top-right-radius: var(--bs-card-inner-border-radius);
+}
+
+@include media-breakpoint-up(sm) {
+  .card-group > .card {
+    &:not(:last-child) {
+      > .lazy-image,
+      > .lazy-image > .card-img-top {
+        border-top-right-radius: 0;
+      }
+    }
+
+    &:not(:first-child) {
+      > .lazy-image,
+      > .lazy-image > .card-img-top {
+        border-top-left-radius: 0;
+      }
+    }
+  }
+}
+
 @keyframes lazy-shimmer {
   0%   { transform: translateX(-100%); }
   100% { transform: translateX(100%); }

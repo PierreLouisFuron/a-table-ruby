@@ -36,4 +36,52 @@
     </div>
   <% end %>
 
+  <div class="col-12 mt-3">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <h5 class="mb-0">Quick and dirty</h5>
+      <%#<button class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-rotate-right"></i></button> %>
+      <%= link_to suggestions_quick_and_dirty_path, data: { turbo_frame: "quick_and_dirty" }, class: "btn btn-outline-primary btn-sm" do %><i class="fa-solid fa-rotate-right"></i><% end %>
+    </div>
+    <%= render 'recipe_suggestions', recipes: @quick_and_dirty_recipes %>
+  </div>
+
+  <div class="col-12 mt-3">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <h5 class="mb-0">Seasonal Suggestions</h5>
+      <button class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-rotate-right"></i></button>
+    </div>
+    <div class="card-group">
+      <div class="card">
+        <%= lazy_image_tag 'placeholders/placeholder.png', class: 'card-img-top', alt: 'recipe suggestion' %>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+        </div>
+      </div>
+      <div class="card">
+        <%= lazy_image_tag 'placeholders/placeholder.png', class: 'card-img-top', alt: 'recipe suggestion' %>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+        </div>
+      </div>
+      <div class="card">
+        <%= lazy_image_tag 'placeholders/placeholder.png', class: 'card-img-top', alt: 'recipe suggestion' %>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+        </div>
+      </div>
+      <div class="card">
+        <%= lazy_image_tag 'placeholders/placeholder.png', class: 'card-img-top', alt: 'recipe suggestion' %>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+        </div>
+      </div>
+      <div class="card">
+        <%= lazy_image_tag 'placeholders/placeholder.png', class: 'card-img-top', alt: 'recipe suggestion' %>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
