@@ -50,7 +50,7 @@
     <div class="col-sm-3">Unit</div>
   </div>
 
-  <div id="recipeIngredients">
+  <div id="recipeIngredients" data-controller="focus-new-field">
     <%= form.fields_for :recipe_ingredients do |recipe_ingredient_form| %>
       <%= render "recipe_ingredient_fields", f: recipe_ingredient_form %>
     <% end %>
@@ -73,7 +73,7 @@
     <div class="col-sm-4">Sources</div>
   </div>
 
-  <div id="recipeSources">
+  <div id="recipeSources" data-controller="focus-new-field">
     <%= form.fields_for :recipe_sources do |recipe_source_form| %>
       <%= render "recipe_source_fields", f: recipe_source_form %>
     <% end %>
