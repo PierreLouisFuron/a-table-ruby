@@ -113,4 +113,59 @@ describe Recipe, type: :model do
       end
     end
   end
+  context 'ingredient ordering' do
+    def add(name)
+      recipe.recipe_ingredients.create!(ingredient: Ingredient.find_or_create_by(name: name))
+    end
+
+    def order
+      recipe.reload.recipe_ingredients.map { |ri| ri.ingredient.name }
+    end
+
+    it 'appends newly created ingredients to the bottom' do
+      add('flour')
+      add('water')
+      add('salt')
+
+      expect(order).to eq(%w[flour water salt])
+      expect(recipe.recipe_ingredients.map(&:position)).to eq([0, 1, 2])
+    end
+
+    it 'reorders ingredients according to the submitted positions' do
+      flour, water, salt = add('flour'), add('water'), add('salt')
+
+      recipe.update!(recipe_ingredients_attributes: [
+        { id: salt.id,  position: 0 },
+        { id: water.id, position: 1 },
+        { id: flour.id, position: 2 }
+      ])
+
+      expect(order).to eq(%w[salt water flour])
+    end
+
+    it 'closes the gap left by a removed ingredient' do
+      flour, water, salt = add('flour'), add('water'), add('salt')
+
+      recipe.update!(recipe_ingredients_attributes: [
+        { id: flour.id, position: 0 },
+        { id: water.id, _destroy: '1' },
+        { id: salt.id,  position: 2 }
+      ])
+
+      expect(order).to eq(%w[flour salt])
+      expect(recipe.recipe_ingredients.map(&:position)).to eq([0, 1])
+    end
+
+    it 'falls back to the existing order when positions collide' do
+      flour, water = add('flour'), add('water')
+
+      recipe.update!(recipe_ingredients_attributes: [
+        { id: water.id, position: 0 },
+        { id: flour.id, position: 0 }
+      ])
+
+      expect(order).to eq(%w[flour water])
+      expect(recipe.recipe_ingredients.map(&:position)).to eq([0, 1])
+    end
+  end
 end

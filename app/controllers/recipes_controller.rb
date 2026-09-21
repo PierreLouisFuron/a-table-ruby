@@ -143,6 +143,7 @@ class RecipesController < ApplicationController
           :quantity,
           :unit,
           :is_optional,
+          :position,
           :_destroy,
           :id,
           ingredient_attributes: [ :name ]

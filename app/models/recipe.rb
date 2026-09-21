@@ -6,7 +6,7 @@ class Recipe < ApplicationRecord
     # has_many :photos, dependent: :destroy
     has_many_attached :images
 
-    has_many :recipe_ingredients, dependent: :destroy
+    has_many :recipe_ingredients, -> { order(:position) }, dependent: :destroy
     has_many :ingredients, :through => :recipe_ingredients
     accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 
@@ -22,6 +22,7 @@ class Recipe < ApplicationRecord
     attribute :prep_time, :integer, default: 0
     attribute :cooking_time, :integer, default: 0
 
+    before_save :reposition_ingredients
     before_save :find_or_create_ingredients
     before_save :find_or_create_sources
 
@@ -134,6 +135,15 @@ class Recipe < ApplicationRecord
     end
 
     private
+
+    # Compacts positions into 0..n-1, honouring the order submitted by the form
+    # (the hidden position field) and closing gaps left by removed rows.
+    # Ties break on the existing order, so a save is stable when positions repeat.
+    def reposition_ingredients
+        kept = recipe_ingredients.reject(&:marked_for_destruction?)
+        kept.sort_by.with_index { |ri, i| [ri.position || 0, i] }
+            .each_with_index { |ri, i| ri.position = i }
+    end
 
     def strip_whitespace
       self.name = name.strip

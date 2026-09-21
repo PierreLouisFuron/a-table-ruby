@@ -1,8 +1,12 @@
-<div class="nested-fields row mb-2">
-  <div class="ingredients col-sm-4">
-    <%= f.fields_for :ingredient do |ingredient| %>
-      <%= render "ingredient_fields", f: ingredient %>
-    <% end %>
+<div class="nested-fields row mb-2 align-items-center">
+  <div class="ingredients col-sm-4 d-flex align-items-center">
+    <span class="drag-handle text-secondary me-2" title="Drag to reorder"><i class="fa fa-grip-vertical"></i></span>
+    <%= f.hidden_field :position, class: 'position-field' %>
+    <div class="flex-grow-1">
+      <%= f.fields_for :ingredient do |ingredient| %>
+        <%= render "ingredient_fields", f: ingredient %>
+      <% end %>
+    </div>
   </div>
 
   <div class="col-sm-2">

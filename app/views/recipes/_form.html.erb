@@ -50,7 +50,11 @@
     <div class="col-sm-3">Unit</div>
   </div>
 
-  <div id="recipeIngredients" data-controller="focus-new-field">
+  <div id="recipeIngredients"
+       data-controller="focus-new-field position"
+       data-position-draggable-value=".nested-fields"
+       data-position-handle-value=".drag-handle"
+       data-position-field-value=".position-field">
     <%= form.fields_for :recipe_ingredients do |recipe_ingredient_form| %>
       <%= render "recipe_ingredient_fields", f: recipe_ingredient_form %>
     <% end %>
