@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   root "home#index"
+  get 'suggestions/quick_and_dirty', to: 'home#refresh_quick_and_dirty_suggestions'
+
   resources :recipes do
     resources :images, only: [:index]
     delete 'image/:id', to: 'recipes#destroy_image', as: 'destroy_image'

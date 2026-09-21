@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "quick_and_dirty" do %>
+  <div class="card-group">
+    <% @quick_and_dirty_recipes.each do |r| %>
+    <div class="card">
+      <%= lazy_image_tag r.get_cover_thumbnail,
+        class: 'card-img-top object-fit-cover',
+        wrapper_class: 'ratio ratio-4x3',
+        alt: 'menu' %>
+      <div class="card-body">
+      <h5 class="card-title"><%= r.name %></h5>
+      </div>
+    </div>
+    <% end %>
+  </div>
+<% end %>
