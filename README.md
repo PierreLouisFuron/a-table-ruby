@@ -19,9 +19,11 @@ Original project: [A Table from Julien Varlet](https://github.com/juvarlet/a_tab
 # Install dependencies
 bundle install
 
+# Start PostgreSQL
+docker compose up -d a-table-postgres
+
 # Database (credentials read from .env — see .env.example)
-bundle exec rails db:create
-bundle exec rails db:migrate
+bundle exec rails db:prepare
 
 # Start the dev server
 bundle exec rails s
@@ -52,6 +54,7 @@ SECRET_KEY_BASE=<openssl rand -hex 64>
 # Database
 POSTGRES_USER=a_table
 POSTGRES_PASSWORD=<your-own-strong-password>
+POSTGRES_POST=5433 (only necessary for local dev)
 ```
 
 Then lock it down:
