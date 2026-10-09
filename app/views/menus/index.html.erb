@@ -42,17 +42,17 @@
 <%= render @menus %>
 
 <h1 class="mt-3">Latest Expired Menus</h1>
-<div class="accordion expired-menus shadow-sm" id="expiredMenusAccordion">
+<div class="accordion expired-menus shadow-sm rounded" id="expiredMenusAccordion">
 
-  <% Menu.expired.limit(5).each do |menu| %>
-    <% if !menu.recipes.empty? %>
+  <% expired_menus = Menu.expired.limit(5).reject { |menu| menu.recipes.empty? } %>
+  <% expired_menus.each_with_index do |menu, index| %>
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= menu.id %>" aria-expanded="false" aria-controls="collapse_<%= menu.id %>">
             From <%= menu.start_date.strftime("%A, %B %d") %> to <%= menu.end_date.strftime("%A, %B %d") %> 
           </button>
         </h2>
-        <div id="collapse_<%= menu.id %>" class="accordion-collapse collapse" data-bs-parent="#expiredMenusAccordion">
+        <div id="collapse_<%= menu.id %>" class="accordion-collapse collapse<%= ' rounded-bottom overflow-hidden' if index == expired_menus.size - 1 %>" data-bs-parent="#expiredMenusAccordion">
           <div class="accordion-body p-0">
             <ul class="list-group list-group-flush">
               <% menu.recipes.each do |recipe| %>
@@ -71,6 +71,5 @@
           </div>
         </div>
       </div>
-    <% end %>
   <% end%>
 </div>
