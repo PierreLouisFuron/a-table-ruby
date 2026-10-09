@@ -1,11 +1,13 @@
 class Menu < ApplicationRecord
 
   has_many :meals, dependent: :destroy
+  has_many :recipes, -> { distinct }, through: :meals
 
   validates_presence_of :start_date
   validates_presence_of :end_date
 
   scope :ongoing, -> { where("end_date >= ?", Date.today) }
+  scope :expired, -> { where("end_date < ?", Date.today).order(start_date: :desc) }
 
   def all_ingredients
     meals.includes(recipes: :ingredients).flat_map(&:all_ingredients).uniq

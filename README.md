@@ -15,6 +15,13 @@ Original project: [A Table from Julien Varlet](https://github.com/juvarlet/a_tab
 
 ## Local Development
 
+Recipe image thumbnails use libvips through the `image_processing` gem. On macOS,
+install the native library before starting Rails:
+
+```bash
+brew install vips
+```
+
 ```bash
 # Install dependencies
 bundle install
